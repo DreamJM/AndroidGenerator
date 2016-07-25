@@ -1,4 +1,4 @@
-package com.jm.android.generator;
+package com.dream.android.generator;
 
 /**
  * Description:
@@ -17,5 +17,6 @@ public class MVPSimpleGenerator {
         BaseBuilder.getInstance().createLibrary();
         BaseBuilder.getInstance().createApp();
     }
+
 
 }

@@ -1,4 +1,4 @@
-package com.jm.android.generator;
+package com.dream.android.generator;
 
 /**
  * Description:

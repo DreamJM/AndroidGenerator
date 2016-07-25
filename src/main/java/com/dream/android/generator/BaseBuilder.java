@@ -1,4 +1,4 @@
-package com.jm.android.generator;
+package com.dream.android.generator;
 
 import java.io.File;
 import java.util.HashMap;
@@ -26,6 +26,8 @@ public class BaseBuilder {
 
     public File resourceDir;
 
+    private static final String DIR_PREFIX = "result/";
+
     public synchronized static BaseBuilder getInstance() {
         if (instance == null) {
             instance = new BaseBuilder();
@@ -41,11 +43,11 @@ public class BaseBuilder {
      * 准备工程（固定项目）
      */
     public void prepareProject() {
-        baseDir = new File(Constants.PROJECT_NAME);
+        baseDir = new File(DIR_PREFIX + Constants.PROJECT_NAME);
         if (baseDir.exists() && baseDir.isDirectory()) {
             FileUtil.deleteDir(baseDir);
         }
-        baseDir.mkdir(); //创建工程根目录
+        baseDir.mkdirs(); //创建工程根目录
         FileUtil.copyFileToDir(baseDir.getAbsolutePath(),
                 new String[]{new File(resourceDir, "settings.gradle").getAbsolutePath()});
         FileUtil.copyFileToDir(baseDir.getAbsolutePath(), new String[]{
@@ -60,7 +62,6 @@ public class BaseBuilder {
         FileUtil.copyFileWithParams(targetSrcFile, srcFile, params);
         createDaoGenerator();
     }
-
 
     public void createLibrary() {
         libDir = new File(baseDir, "library");
@@ -138,6 +139,4 @@ public class BaseBuilder {
     private String getPackagePath() {
         return Constants.PACKAGE.replaceAll("[/.]", "/");
     }
-
-
 }
