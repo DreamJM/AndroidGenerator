@@ -28,6 +28,10 @@ public class BaseBuilder {
 
     private static final String DIR_PREFIX = "result/";
 
+    private static final String MVP_PREFIX = "mvp_";
+
+    private static final String MVVM_PREFIX = "mvvm_";
+
     public synchronized static BaseBuilder getInstance() {
         if (instance == null) {
             instance = new BaseBuilder();
@@ -63,6 +67,38 @@ public class BaseBuilder {
         createDaoGenerator();
     }
 
+    /**
+     * 生成MVP基础库
+     */
+    public void createMVPLibrary() {
+        libDir = new File(baseDir, "library");
+        libDir.mkdir();
+        Map<String, String> params = new HashMap<>();
+        params.put("MIN_SDK_VERSION", String.valueOf(Constants.MIN_SDK_VERSION));
+        params.put("TARGET_SDK_VERSION", String.valueOf(Constants.TARGET_SDK_VERSION));
+        params.put("JAVA_VERSION", Constants.JAVA_VERSION);
+        params.put("BUILD_TOOLS_VERSION", Constants.BUILD_TOOLS_VERSION);
+        File srcFile = new File(resourceDir, MVP_PREFIX + "library/lib_build.txt");
+        File targetSrcFile = new File(libDir, "build.gradle");
+        FileUtil.copyFileWithParams(targetSrcFile, srcFile, params);
+
+        File androidBaseDir = new File(baseDir, "library/src/main");
+        androidBaseDir.mkdirs();
+        FileUtil.copyDir(androidBaseDir.getAbsolutePath(), new File(resourceDir, MVP_PREFIX + "library/res").getAbsolutePath());
+
+        File amSrcFile = new File(resourceDir, MVP_PREFIX + "library/AndroidManifest.xml");
+        File amTargetSrcFile = new File(baseDir, "library/src/main/AndroidManifest.xml");
+        params.clear();
+        params.put("PACKAGE", Constants.PACKAGE + ".lib");
+        FileUtil.copyFileWithParams(amTargetSrcFile, amSrcFile, params);
+        File srcDir = new File(androidBaseDir, "java/" + getPackagePath());
+        srcDir.mkdirs();
+        FileUtil.copyDir(srcDir.getAbsolutePath(), new File(resourceDir, MVP_PREFIX + "library/lib").getAbsolutePath());
+    }
+
+    /**
+     * 生成基础库文件（正常和mvvm所使用）
+     */
     public void createLibrary() {
         libDir = new File(baseDir, "library");
         libDir.mkdir();
@@ -89,6 +125,39 @@ public class BaseBuilder {
         FileUtil.copyDir(srcDir.getAbsolutePath(), new File(resourceDir, "library/lib").getAbsolutePath());
     }
 
+    /**
+     * 生成mvp示例app
+     */
+    public void createMVPApp() {
+        appDir = new File(baseDir, "app");
+        appDir.mkdir();
+        Map<String, String> params = new HashMap<>();
+        params.put("MIN_SDK_VERSION", String.valueOf(Constants.MIN_SDK_VERSION));
+        params.put("TARGET_SDK_VERSION", String.valueOf(Constants.TARGET_SDK_VERSION));
+        params.put("JAVA_VERSION", Constants.JAVA_VERSION);
+        params.put("BUILD_TOOLS_VERSION", Constants.BUILD_TOOLS_VERSION);
+        File srcFile = new File(resourceDir, MVP_PREFIX + "app/app_build.txt");
+        File targetSrcFile = new File(appDir, "build.gradle");
+        FileUtil.copyFileWithParams(targetSrcFile, srcFile, params);
+
+        File androidBaseDir = new File(baseDir, "app/src/main");
+        androidBaseDir.mkdirs();
+        FileUtil.copyDir(androidBaseDir.getAbsolutePath(), new File(resourceDir, MVP_PREFIX + "app/res").getAbsolutePath());
+
+        File amSrcFile = new File(resourceDir, MVP_PREFIX + "app/AndroidManifest.xml");
+        File amTargetSrcFile = new File(baseDir, "app/src/main/AndroidManifest.xml");
+        params.clear();
+        params.put("PACKAGE", Constants.PACKAGE);
+        FileUtil.copyFileWithParams(amTargetSrcFile, amSrcFile, params);
+
+        File srcDir = new File(androidBaseDir, "java/" + getPackagePath());
+        srcDir.mkdirs();
+        FileUtil.copyDir2(srcDir.getAbsolutePath(), new File(resourceDir, MVP_PREFIX + "app/src").getAbsolutePath());
+    }
+
+    /**
+     * 生成基础APP
+     */
     public void createApp() {
         appDir = new File(baseDir, "app");
         appDir.mkdir();
@@ -114,6 +183,65 @@ public class BaseBuilder {
         File srcDir = new File(androidBaseDir, "java/" + getPackagePath());
         srcDir.mkdirs();
         FileUtil.copyDir2(srcDir.getAbsolutePath(), new File(resourceDir, "app/src").getAbsolutePath());
+    }
+
+    /**
+     * 生成mvvm基础APP
+     */
+    public void createMVVMApp() {
+        appDir = new File(baseDir, "app");
+        appDir.mkdir();
+        Map<String, String> params = new HashMap<>();
+        params.put("MIN_SDK_VERSION", String.valueOf(Constants.MIN_SDK_VERSION));
+        params.put("TARGET_SDK_VERSION", String.valueOf(Constants.TARGET_SDK_VERSION));
+        params.put("JAVA_VERSION", Constants.JAVA_VERSION);
+        params.put("BUILD_TOOLS_VERSION", Constants.BUILD_TOOLS_VERSION);
+        File srcFile = new File(resourceDir, MVVM_PREFIX + "app/app_build.txt");
+        File targetSrcFile = new File(appDir, "build.gradle");
+        FileUtil.copyFileWithParams(targetSrcFile, srcFile, params);
+
+        File androidBaseDir = new File(baseDir, "app/src/main");
+        androidBaseDir.mkdirs();
+        FileUtil.copyDir(androidBaseDir.getAbsolutePath(), new File(resourceDir, MVVM_PREFIX + "app/res").getAbsolutePath());
+
+        File amSrcFile = new File(resourceDir, MVVM_PREFIX + "app/AndroidManifest.xml");
+        File amTargetSrcFile = new File(baseDir, "app/src/main/AndroidManifest.xml");
+        params.clear();
+        params.put("PACKAGE", Constants.PACKAGE);
+        FileUtil.copyFileWithParams(amTargetSrcFile, amSrcFile, params);
+
+        File srcDir = new File(androidBaseDir, "java/" + getPackagePath());
+        srcDir.mkdirs();
+        FileUtil.copyDir2(srcDir.getAbsolutePath(), new File(resourceDir, MVVM_PREFIX + "app/src").getAbsolutePath());
+    }
+
+    /**
+     * 生成MVVM基础库
+     */
+    public void createMVVMLibrary() {
+        libDir = new File(baseDir, "library");
+        libDir.mkdir();
+        Map<String, String> params = new HashMap<>();
+        params.put("MIN_SDK_VERSION", String.valueOf(Constants.MIN_SDK_VERSION));
+        params.put("TARGET_SDK_VERSION", String.valueOf(Constants.TARGET_SDK_VERSION));
+        params.put("JAVA_VERSION", Constants.JAVA_VERSION);
+        params.put("BUILD_TOOLS_VERSION", Constants.BUILD_TOOLS_VERSION);
+        File srcFile = new File(resourceDir, MVVM_PREFIX + "library/lib_build.txt");
+        File targetSrcFile = new File(libDir, "build.gradle");
+        FileUtil.copyFileWithParams(targetSrcFile, srcFile, params);
+
+        File androidBaseDir = new File(baseDir, "library/src/main");
+        androidBaseDir.mkdirs();
+        FileUtil.copyDir(androidBaseDir.getAbsolutePath(), new File(resourceDir, MVVM_PREFIX + "library/res").getAbsolutePath());
+
+        File amSrcFile = new File(resourceDir, MVVM_PREFIX + "library/AndroidManifest.xml");
+        File amTargetSrcFile = new File(baseDir, "library/src/main/AndroidManifest.xml");
+        params.clear();
+        params.put("PACKAGE", Constants.PACKAGE + ".lib");
+        FileUtil.copyFileWithParams(amTargetSrcFile, amSrcFile, params);
+        File srcDir = new File(androidBaseDir, "java/" + getPackagePath());
+        srcDir.mkdirs();
+        FileUtil.copyDir(srcDir.getAbsolutePath(), new File(resourceDir, MVVM_PREFIX + "library/lib").getAbsolutePath());
     }
 
     /**

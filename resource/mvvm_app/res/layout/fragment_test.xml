@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <LinearLayout
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+        <include layout="@layout/tool_bar"/>
+
+        <com.wafa.android.pei.lib.widget.CompositePtrView
+                android:id="@+id/ptr_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cptr_ptr_enable="true"
+                app:cptr_loadmore_enable="false"
+                android:background="#f0f0f0"/>
+    </LinearLayout>
+</layout>
+

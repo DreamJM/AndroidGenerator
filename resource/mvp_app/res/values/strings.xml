@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mine Project</string>
+    <string name="home">主页</string>
+    <string name="message">消息</string>
+</resources>

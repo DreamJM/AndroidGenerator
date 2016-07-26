@@ -21,7 +21,7 @@ import com.wafa.android.pei.lib.R;
  * @author jiangm
  * @date 16/5/27
  */
-public abstract class BaseFragment extends Fragment implements IBaseView {
+public abstract class BaseFragment extends Fragment {
 
     protected Toolbar titleBar;
 
@@ -62,55 +62,46 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
 
     protected abstract String getFragmentName();
 
-    @Override
     public void showLoadingToast(String message, boolean cancelable) {
         ((BaseActivity) getActivity()).showLoadingToast(message, cancelable);
     }
 
-    @Override
     public void hideLoadingToast() {
         ((BaseActivity) getActivity()).hideLoadingToast();
     }
 
-    @Override
     public void showLoadingDialog(String message) {
         ((BaseActivity) getActivity()).showLoadingDialog(message);
     }
 
-    @Override
     public void hideDialog() {
         ((BaseActivity) getActivity()).hideDialog();
     }
 
-    @Override
     public void showErrorToast(String message) {
         if (getActivity() != null) {
             ((BaseActivity) getActivity()).showErrorToast(message);
         }
     }
 
-    @Override
     public void showErrorDialog(String title, String message, DialogInterface.OnDismissListener listener) {
         if (getActivity() != null) {
             ((BaseActivity) getActivity()).showErrorDialog(title, message, listener);
         }
     }
 
-    @Override
     public void showSuccessDialog(String title, String message, DialogInterface.OnDismissListener listener) {
         if (getActivity() != null) {
             ((BaseActivity) getActivity()).showSuccessDialog(title, message, listener);
         }
     }
 
-    @Override
     public void showAlertDialog(String title, String message, SweetAlertDialog.OnSweetClickListener confirmClickListener) {
         if (getActivity() != null) {
             ((BaseActivity) getActivity()).showAlertDialog(title, message, confirmClickListener);
         }
     }
 
-    @Override
     public void showAlertDialog(String title, String message, String btnConfirm, SweetAlertDialog.OnSweetClickListener confirmClickListener) {
         if (getActivity() != null) {
             ((BaseActivity) getActivity()).showAlertDialog(title, message, btnConfirm, confirmClickListener);

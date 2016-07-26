@@ -1,0 +1,25 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="launch" type="com.wafa.android.pei.model.LaunchItem"/>
+        <variable name="event" type="com.wafa.android.pei.feature.main.event.SplashEvent"/>
+    </data>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="@{()->event.showTargetUrl(launch)}">
+        <com.wafa.android.pei.lib.widget.LoadingImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:imageScale="crop"
+                app:imageUrl="@{launch.url}"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/sp_20"
+                android:text="@{launch.title}"/>
+    </RelativeLayout>
+</layout>
+

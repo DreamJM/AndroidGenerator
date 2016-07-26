@@ -2,7 +2,6 @@ package com.wafa.android.pei.feature.main;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,14 +9,9 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.wafa.android.pei.R;
-import com.wafa.android.pei.base.PresenterActivity;
-import com.wafa.android.pei.base.PresenterListActivity;
+import com.wafa.android.pei.base.DIActivity;
 import com.wafa.android.pei.di.component.ActivityComponent;
-import com.wafa.android.pei.feature.main.adapter.TestAdapter;
-import com.wafa.android.pei.feature.main.presenter.MainPresenter;
-import com.wafa.android.pei.feature.main.view.IMainView;
 import com.wafa.android.pei.lib.base.BaseFragment;
-import com.wafa.android.pei.model.Datum;
 
 import java.util.List;
 
@@ -29,7 +23,7 @@ import java.util.List;
  * @author jiangm
  * @date 16/5/27
  */
-public class MainActivity extends PresenterActivity<MainPresenter> implements IMainView {
+public class MainActivity extends DIActivity {
 
     private static final String[] FG_TAGS = new String[]{"fgHome", "fgOrder", "fgCarParts", "fgConversation"};
 
@@ -47,7 +41,6 @@ public class MainActivity extends PresenterActivity<MainPresenter> implements IM
     @Override
     protected void onCreateView(Bundle savedInstanceState) {
         super.onCreateView(savedInstanceState);
-        presenter.init(this);
         FragmentManager fm = getFragmentManager();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (savedInstanceState == null) {
