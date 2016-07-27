@@ -1,24 +1,29 @@
+/*
+ * Copyright (C) 2016 Meng Jiang
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.dream.android.generator;
 
 import java.io.*;
 import java.util.Map;
 
-/**
- * Description:
- * <p>
- * Copyright: Copyright (c) 2016, All rights reserved.
- * <p>
- * Company:中配联电子商务南京有限公司
- *
- * @author snovajiang
- * @date 16/5/26
- */
 public class FileUtil {
 
     public static boolean deleteDir(File dir) {
         if (dir.isDirectory()) {
             String[] children = dir.list();
-            //递归删除目录中的子目录下
             for (int i=0; i<children.length; i++) {
                 boolean success = deleteDir(new File(dir, children[i]));
                 if (!success) {
@@ -26,98 +31,94 @@ public class FileUtil {
                 }
             }
         }
-        // 目录此时为空，可以删除
         return dir.delete();
     }
 
-    // 复制目录到指定目录,将目录以及目录下的文件和子目录全部复制到目标目录
-    public static void copyDir(String toPath, String fromPath) {
-        File targetFile = new File(toPath);// 创建文件
-        createFile(targetFile, false);// 创建目录
-        File file = new File(fromPath);// 创建文件
-        if (targetFile.isDirectory() && file.isDirectory()) {// 如果传入是目录
+    public static void copyDir(String toPath, String fromPath, String packageName) {
+        File targetFile = new File(toPath);
+        createFile(targetFile, false);
+        File file = new File(fromPath);
+        if (targetFile.isDirectory() && file.isDirectory()) {
             copyFileToDir(targetFile.getAbsolutePath() + "/" + file.getName(),
-                    listFile(file));// 复制文件到指定目录
+                    listFile(file), packageName);
         }
     }
 
-    // 将目录下的文件和子目录全部复制到目标目录
-    public static void copyDir2(String toPath, String fromPath) {
-        File targetFile = new File(toPath);// 创建文件
-        File file = new File(fromPath);// 创建文件
-        if (targetFile.isDirectory() && file.isDirectory()) {// 如果传入是目录
+    public static void copyDir2(String toPath, String fromPath, String packageName) {
+        File targetFile = new File(toPath);
+        File file = new File(fromPath);
+        if (targetFile.isDirectory() && file.isDirectory()) {
             copyFileToDir(targetFile.getAbsolutePath(),
-                    listFile(file));// 复制文件到指定目录
+                    listFile(file), packageName);
         }
     }
 
-    public static void copyFile(File toFile, File fromFile) {// 复制文件
-        if (toFile.exists()) {// 判断目标目录中文件是否存在
-            System.out.println("文件" + toFile.getAbsolutePath() + "已经存在，跳过该文件！");
+    public static void copyFile(File toFile, File fromFile, String packageName) {// 复制文件
+        if (toFile.exists()) {
+            System.out.println("file " + toFile.getAbsolutePath() + " already exists, skip！");
             return;
         } else {
-            createFile(toFile, true);// 创建文件
+            createFile(toFile, true);
         }
-        System.out.println("复制文件" + fromFile.getAbsolutePath() + "到"
+        System.out.println("copy file " + fromFile.getAbsolutePath() + " to "
                 + toFile.getAbsolutePath());
         try {
             if(fromFile.getName().endsWith(".java")) {
-                BufferedReader br = new BufferedReader(new FileReader(fromFile));// 创建文件输入流
+                BufferedReader br = new BufferedReader(new FileReader(fromFile));
                 BufferedWriter bw = new BufferedWriter(new FileWriter(toFile));
                 String line = "";
                 while ((line = br.readLine()) != null) {
-                    line = line.replaceAll("com.wafa.android.pei", Constants.PACKAGE);
+                    line = line.replaceAll("com.wafa.android.pei", packageName);
                     bw.write(line);
                     bw.newLine();
                 }
                 bw.flush();
-                br.close();// 输入流关闭
-                bw.close();// 输出流关闭
+                br.close();
+                bw.close();
             } else {
-                InputStream is = new FileInputStream(fromFile);// 创建文件输入流
-                FileOutputStream fos = new FileOutputStream(toFile);// 文件输出流
-                byte[] buffer = new byte[1024];// 字节数组
+                InputStream is = new FileInputStream(fromFile);
+                FileOutputStream fos = new FileOutputStream(toFile);
+                byte[] buffer = new byte[1024];
                 int byteread;
-                while ((byteread = is.read(buffer)) != -1) {// 将文件内容写到文件中
+                while ((byteread = is.read(buffer)) != -1) {
                     fos.write(buffer, 0, byteread);
                 }
-                is.close();// 输入流关闭
-                fos.close();// 输出流关闭
+                is.close();
+                fos.close();
             }
-        } catch (FileNotFoundException e) {// 捕获文件不存在异常
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e) {// 捕获异常
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // 复制一组文件到指定目录。targetDir是目标目录，filePath是需要复制的文件路径
-    public static void copyFileToDir(String toDir, String[] filePath) {
-        if (toDir == null || "".equals(toDir)) {// 目录路径为空
-            System.out.println("参数错误，目标路径不能为空");
+    public static void copyFileToDir(String toDir, String[] filePath, String packageName) {
+        if (toDir == null || "".equals(toDir)) {
+            System.out.println("parameter error, target directory can't be null");
             return;
         }
         File targetFile = new File(toDir);
-        if (!targetFile.exists()) {// 如果指定目录不存在
-            targetFile.mkdir();// 新建目录
+        if (!targetFile.exists()) {
+            targetFile.mkdir();
         } else {
-            if (!targetFile.isDirectory()) {// 如果不是目录
-                System.out.println("参数错误，目标路径指向的不是一个目录！");
+            if (!targetFile.isDirectory()) {
+                System.out.println("parameter error, target file is not a directory");
                 return;
             }
         }
-        for (int i = 0; i < filePath.length; i++) {// 遍历需要复制的文件路径
-            File file = new File(filePath[i]);// 创建文件
-            if (file.isDirectory()) {// 判断是否是目录
-                copyFileToDir(toDir + "/" + file.getName(), listFile(file));// 递归调用方法获得目录下的文件
-                System.out.println("复制文件 " + file);
+        for (int i = 0; i < filePath.length; i++) {
+            File file = new File(filePath[i]);
+            if (file.isDirectory()) {
+                copyFileToDir(toDir + "/" + file.getName(), listFile(file), packageName);
+                System.out.println("copy file " + file);
             } else {
-                copyFileToDir(toDir, file, "");// 复制文件到指定目录
+                copyFileToDir(toDir, file, "", packageName);
             }
         }
     }
 
-    public static void copyFileToDir(String toDir, File file, String newName) {// 复制文件到指定目录
+    public static void copyFileToDir(String toDir, File file, String newName, String packageName) {
         String newFile = "";
         if (newName != null && !"".equals(newName)) {
             newFile = toDir + "/" + newName;
@@ -125,48 +126,48 @@ public class FileUtil {
             newFile = toDir + "/" + file.getName();
         }
         File tFile = new File(newFile);
-        copyFile(tFile, file);// 调用方法复制文件
+        copyFile(tFile, file, packageName);
     }
 
-    public static void createFile(File file, boolean isFile) {// 创建文件
-        if (!file.exists()) {// 如果文件不存在
-            if (!file.getParentFile().exists()) {// 如果文件父目录不存在
+    public static void createFile(File file, boolean isFile) {
+        if (!file.exists()) {
+            if (!file.getParentFile().exists()) {
                 createFile(file.getParentFile(), false);
-            } else {// 存在文件父目录
-                if (isFile) {// 创建文件
+            } else {
+                if (isFile) {
                     try {
-                        file.createNewFile();// 创建新文件
+                        file.createNewFile();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 } else {
-                    file.mkdir();// 创建目录
+                    file.mkdir();
                 }
             }
         }
     }
 
-    public static String[] listFile(File dir) {// 获取文件绝对路径
-        String absolutPath = dir.getAbsolutePath();// 声获字符串赋值为路传入文件的路径
-        String[] paths = dir.list();// 文件名数组
-        String[] files = new String[paths.length];// 声明字符串数组，长度为传入文件的个数
-        for (int i = 0; i < paths.length; i++) {// 遍历显示文件绝对路径
+    public static String[] listFile(File dir) {
+        String absolutPath = dir.getAbsolutePath();
+        String[] paths = dir.list();
+        String[] files = new String[paths.length];
+        for (int i = 0; i < paths.length; i++) {
             files[i] = absolutPath + "/" + paths[i];
         }
         return files;
     }
 
-    public static void copyFileWithParams(File toFile, File fromFile, Map<String, String> params) {// 复制文件
-        if (toFile.exists()) {// 判断目标目录中文件是否存在
-            System.out.println("文件" + toFile.getAbsolutePath() + "已经存在，跳过该文件！");
+    public static void copyFileWithParams(File toFile, File fromFile, Map<String, String> params) {
+        if (toFile.exists()) {
+            System.out.println("file " + toFile.getAbsolutePath() + "already exists, skip！");
             return;
         } else {
-            createFile(toFile, true);// 创建文件
+            createFile(toFile, true);
         }
-        System.out.println("复制文件" + fromFile.getAbsolutePath() + "到"
+        System.out.println("copy file " + fromFile.getAbsolutePath() + " to "
                 + toFile.getAbsolutePath());
         try {
-            BufferedReader br = new BufferedReader(new FileReader(fromFile));// 创建文件输入流
+            BufferedReader br = new BufferedReader(new FileReader(fromFile));
             BufferedWriter bw = new BufferedWriter(new FileWriter(toFile));
             String line = "";
             while ((line = br.readLine()) != null) {
@@ -175,11 +176,11 @@ public class FileUtil {
                 bw.newLine();
             }
             bw.flush();
-            br.close();// 输入流关闭
-            bw.close();// 输出流关闭
-        } catch (FileNotFoundException e) {// 捕获文件不存在异常
+            br.close();
+            bw.close();
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e) {// 捕获异常
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
