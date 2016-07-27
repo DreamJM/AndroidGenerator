@@ -24,12 +24,7 @@ task clearPj(type:Delete){
     delete 'AndroidGenerator.jar'
 }
 
-task resourceCp(type: Copy) {
-    from 'resource'
-    into ('target/resource')
-}
-
-task release(type: Copy,dependsOn: [build,clearPj,resourceCp]) {
+task release(type: Copy,dependsOn: [build,clearPj]) {
     from('build/libs') {
         include '*.jar'
     }
