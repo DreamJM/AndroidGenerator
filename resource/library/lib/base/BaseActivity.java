@@ -21,7 +21,7 @@ import com.wafa.android.pei.lib.widget.loading.LoadingDialog;
  * @author jiangm
  * @date 16/5/27
  */
-public abstract class BaseActivity extends AppCompatActivity implements IBaseView {
+public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 界面Header
@@ -113,7 +113,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      */
     protected abstract String getActivityName();
 
-    @Override
     public void showLoadingToast(String message, boolean cancelable) {
         if(loadingDialog == null) {
             loadingDialog = new LoadingDialog(this);
@@ -122,14 +121,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         loadingDialog.show();
     }
 
-    @Override
     public void hideLoadingToast() {
         if(loadingDialog != null && loadingDialog.isShowing()) {
             loadingDialog.dismiss();
         }
     }
 
-    @Override
     public void showLoadingDialog(String message) {
         if (dialog == null || !dialog.isShowing()) {
             dialog = new SweetAlertDialog(this).setCancelClickListener(sweetAlertDialog -> sweetAlertDialog.dismiss());
@@ -142,19 +139,16 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         dialog.setOnDismissListener(null);
     }
 
-    @Override
     public void hideDialog() {
         if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
         }
     }
 
-    @Override
     public void showErrorToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
     public void showErrorDialog(String title, String message, DialogInterface.OnDismissListener listener) {
         if (dialog == null || !dialog.isShowing()) {
             dialog = new SweetAlertDialog(this).setCancelClickListener(sweetAlertDialog -> sweetAlertDialog.dismiss());
@@ -167,7 +161,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         dialog.setOnDismissListener(listener);
     }
 
-    @Override
     public void showSuccessDialog(String title, String message, DialogInterface.OnDismissListener listener) {
         if (dialog == null || !dialog.isShowing()) {
             dialog = new SweetAlertDialog(this).setCancelClickListener(sweetAlertDialog -> sweetAlertDialog.dismiss());
@@ -180,12 +173,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         dialog.setOnDismissListener(listener);
     }
 
-    @Override
     public void showAlertDialog(String title, String message, SweetAlertDialog.OnSweetClickListener confirmClickListener) {
         showAlertDialog(title, message, getString(R.string.ensure), confirmClickListener);
     }
 
-    @Override
     public void showAlertDialog(String title, String message, String confirmBtn, SweetAlertDialog.OnSweetClickListener confirmClickListener) {
         if (dialog == null || !dialog.isShowing()) {
             dialog = new SweetAlertDialog(this).setCancelClickListener(sweetAlertDialog -> sweetAlertDialog.dismiss());

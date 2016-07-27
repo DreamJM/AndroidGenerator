@@ -1,0 +1,85 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="index" type="android.databinding.ObservableInt"/>
+        <variable name="tabEvent" type="com.wafa.android.pei.feature.main.event.TabEvent"/>
+    </data>
+    <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+
+        <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        <View
+                style="@style/divider"
+                android:background="#e0e0e0"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45"
+                android:background="@color/bottom_bar_bg"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/btn_home"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_selector"
+                    android:paddingTop="@dimen/dp_5"
+                    android:drawableTop="@drawable/tab_home_selector"
+                    android:text="@string/home"
+                    android:textColor="@color/main_tab_selector"
+                    android:textSize="@dimen/sp_11"
+                    android:onClick="@{()->tabEvent.showIndex(0)}"
+                    app:buttonSelect="@{index.get()==0}"/>
+
+            <Button
+                    android:id="@+id/btn_tab1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_selector"
+                    android:paddingTop="@dimen/dp_5"
+                    android:drawableTop="@drawable/tab_home_selector"
+                    android:text="tab1"
+                    android:textColor="@color/main_tab_selector"
+                    android:textSize="@dimen/sp_11"
+                    android:onClick="@{()->tabEvent.showIndex(1)}"
+                    app:buttonSelect="@{index.get()==1}"/>
+
+            <Button
+                    android:id="@+id/btn_msg"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_selector"
+                    android:paddingTop="@dimen/dp_5"
+                    android:drawableTop="@drawable/tab_msg_selector"
+                    android:text="@string/message"
+                    android:textColor="@color/main_tab_selector"
+                    android:textSize="@dimen/sp_11"
+                    android:onClick="@{()->tabEvent.showIndex(2)}"
+                    app:buttonSelect="@{index.get()==2}"/>
+
+            <Button
+                    android:id="@+id/btn_tab2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/dp_5"
+                    android:background="@drawable/bg_selector"
+                    android:drawableTop="@drawable/tab_mine_selector"
+                    android:text="tab_end"
+                    android:textColor="@color/main_tab_selector"
+                    android:textSize="@dimen/sp_11"
+                    android:onClick="@{()->tabEvent.showIndex(3)}"
+                    app:buttonSelect="@{index.get()==3}"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>
