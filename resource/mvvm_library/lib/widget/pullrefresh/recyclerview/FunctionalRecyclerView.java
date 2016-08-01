@@ -1,23 +1,22 @@
-package com.wafa.android.pei.lib.widget.pullrefresh.recyclerview;
+package com.dream.android.sample.lib.widget.pullrefresh.recyclerview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import com.wafa.android.pei.lib.R;
-import com.wafa.android.pei.lib.widget.hint.ErrorView;
-import com.wafa.android.pei.lib.widget.hint.NoContentView;
+import com.dream.android.sample.lib.R;
+import com.dream.android.sample.lib.widget.hint.ErrorView;
+import com.dream.android.sample.lib.widget.hint.NoContentView;
 
 /**
  * Description:
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author snovajiang
+ * @author Dream
  * @date 16/6/1
  */
 public class FunctionalRecyclerView extends FrameLayout {
@@ -45,14 +44,14 @@ public class FunctionalRecyclerView extends FrameLayout {
 
     private void init(Context context, AttributeSet attrs) {
         recyclerView = new RecyclerView(context);
-        addView(recyclerView, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        addView(recyclerView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
         noContentView = new NoContentView(context);
-        addView(noContentView, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        addView(noContentView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         noContentView.setVisibility(View.GONE);
 
         errorView = new ErrorView(context);
-        addView(errorView, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        addView(errorView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         errorView.setVisibility(View.GONE);
 
         String ncContent = null;

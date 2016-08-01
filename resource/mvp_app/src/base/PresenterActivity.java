@@ -1,23 +1,23 @@
-package com.wafa.android.pei.base;
+package com.dream.android.sample.base;
 
 import android.os.Bundle;
-import com.wafa.android.pei.MainApplication;
-import com.wafa.android.pei.di.component.ActivityComponent;
-import com.wafa.android.pei.di.component.ApplicationComponent;
-import com.wafa.android.pei.di.component.DaggerActivityComponent;
-import com.wafa.android.pei.di.module.ActivityModule;
-import com.wafa.android.pei.lib.base.BaseActivity;
-import com.wafa.android.pei.lib.base.HasComponent;
-import com.wafa.android.pei.lib.base.Presenter;
+import com.dream.android.sample.MainApplication;
+import com.dream.android.sample.di.component.ActivityComponent;
+import com.dream.android.sample.di.component.ApplicationComponent;
+import com.dream.android.sample.di.component.DaggerActivityComponent;
+import com.dream.android.sample.di.module.ActivityModule;
+import com.dream.android.sample.lib.base.BaseActivity;
+import com.dream.android.sample.lib.base.HasComponent;
+import com.dream.android.sample.lib.base.Presenter;
 
 import javax.inject.Inject;
 
 /**
- * Description:已实现依赖注入的Activity，可自动导入Presenter对象
+ * Description:base presenter manager class for activity(inject presenter automatically)
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public abstract class PresenterActivity<T extends Presenter> extends BaseActivity implements HasComponent<ActivityComponent> {

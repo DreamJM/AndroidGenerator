@@ -1,7 +1,7 @@
-package com.wafa.android.pei.lib.widget.pullrefresh;
+package com.dream.android.sample.lib.widget.pullrefresh;
 
 
-import com.wafa.android.pei.lib.widget.pullrefresh.indicator.PtrIndicator;
+import com.dream.android.sample.lib.widget.pullrefresh.indicator.PtrIndicator;
 
 /**
  * A single linked list to wrap PtrUIHandler

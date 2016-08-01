@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.widget.pullrefresh.recyclerview;
+package com.dream.android.sample.lib.widget.pullrefresh.recyclerview;
 
 import android.support.v7.widget.RecyclerView;
 
@@ -9,7 +9,7 @@ import java.util.List;
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author snovajiang
+ * @author Dream
  * @date 16/5/31
  */
 public abstract class PtrRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

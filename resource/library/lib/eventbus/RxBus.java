@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.eventbus;
+package com.dream.android.sample.lib.eventbus;
 
 import android.support.annotation.NonNull;
 import rx.Observable;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Created by snovajiang on 15/10/28.
+ * Created by Dream on 15/10/28.
  */
 public class RxBus {
 

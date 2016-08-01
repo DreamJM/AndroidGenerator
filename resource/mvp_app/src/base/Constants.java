@@ -1,15 +1,14 @@
-package com.wafa.android.pei.base;
+package com.dream.android.sample.base;
 
-import com.wafa.android.pei.lib.base.BaseConstants;
+import com.dream.android.sample.lib.base.BaseConstants;
 
 /**
- * Description:全局常量的统一管理类，如Bundle中的Key、Action等
- *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/26
  */
 public class Constants extends BaseConstants {
-
+    public static final String OWNER= "DreamJM";
+    public static final String REPO = "AndroidGenerator";
 }

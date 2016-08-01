@@ -1,15 +1,15 @@
-package com.wafa.android.pei.lib.utils;
+package com.dream.android.sample.lib.utils;
 
 import android.content.Context;
 import android.text.TextUtils;
-import com.wafa.android.pei.lib.R;
+import com.dream.android.sample.lib.R;
 
 /**
- * Description:服务器错误码与错误信息的转换工具类
+ * Description:error information
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public class ErrorUtil {
@@ -24,12 +24,12 @@ public class ErrorUtil {
     }
 
     public static String getServerErrorMsg(Context context, int code, String msg) {
-        String faultString = context.getString(R.string.network_error);
+        String faultString;
         int id = context.getResources().getIdentifier("MSG_E" + code, "string" , context.getPackageName());
         if(id != 0) {
             faultString = context.getString(id);
         }else{
-            faultString=msg;
+            faultString = msg;
         }
         if(TextUtils.isEmpty(faultString)){
             faultString = context.getString(R.string.network_error);

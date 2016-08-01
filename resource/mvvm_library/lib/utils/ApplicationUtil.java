@@ -1,33 +1,22 @@
-package com.wafa.android.pei.lib.utils;
+package com.dream.android.sample.lib.utils;
 
-import android.app.DownloadManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.os.Bundle;
 
-import java.util.List;
-
 /**
- * Description:程序信息管理工具类
+ * Description:Application Tools
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public class ApplicationUtil {
 
-    /**
-     * 检测Sdcard是否存在
-     *
-     * @return
-     */
     public static boolean isExitsSdcard() {
         if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
             return true;
@@ -35,10 +24,6 @@ public class ApplicationUtil {
             return false;
     }
 
-    /**
-     * 检查网络是否可用
-     * @return
-     */
     public static boolean isOpenNetwork(Context context) {
         ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connManager.getActiveNetworkInfo() != null) {
@@ -47,11 +32,6 @@ public class ApplicationUtil {
         return false;
     }
 
-    /**
-     * 获取当前程序版本名
-     *
-     * @return
-     */
     public static String getPackageVersionName(Context context) {
         String version = "";
         try {
@@ -64,11 +44,6 @@ public class ApplicationUtil {
         return version;
     }
 
-    /**
-     * 获取当前程序版本名
-     *
-     * @return
-     */
     public static int getPackageVersionCode(Context context) {
         int version = -1;
         try {
@@ -79,9 +54,6 @@ public class ApplicationUtil {
         return version;
     }
 
-    /**
-     * 获取配置在AndroidManifest中的Metadata
-      */
     public static String getMetaValue(Context context, String metaKey) {
         Bundle metaData = null;
         String result = null;
@@ -102,5 +74,4 @@ public class ApplicationUtil {
         }
         return result;
     }
-
 }

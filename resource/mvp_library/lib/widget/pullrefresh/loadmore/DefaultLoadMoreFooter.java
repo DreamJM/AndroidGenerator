@@ -13,13 +13,13 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-package com.wafa.android.pei.lib.widget.pullrefresh.loadmore;
+package com.dream.android.sample.lib.widget.pullrefresh.loadmore;
 
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import com.wafa.android.pei.lib.R;
+import com.dream.android.sample.lib.R;
 
 /**
  * default load more view

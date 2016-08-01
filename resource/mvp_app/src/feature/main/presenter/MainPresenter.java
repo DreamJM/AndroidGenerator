@@ -1,8 +1,8 @@
-package com.wafa.android.pei.feature.main.presenter;
+package com.dream.android.sample.feature.main.presenter;
 
-import com.wafa.android.pei.feature.main.view.IMainView;
-import com.wafa.android.pei.lib.base.PerActivity;
-import com.wafa.android.pei.lib.base.Presenter;
+import com.dream.android.sample.feature.main.view.IMainView;
+import com.dream.android.sample.lib.base.PerActivity;
+import com.dream.android.sample.lib.base.Presenter;
 
 import javax.inject.Inject;
 
@@ -11,7 +11,7 @@ import javax.inject.Inject;
  * <p>
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 @PerActivity

@@ -1,18 +1,17 @@
-package com.wafa.android.pei.lib.widget.pullrefresh.recyclerview;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.dream.android.sample.lib.widget.pullrefresh.recyclerview;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.AdapterDataObserver;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecyclerAdapterWithHF extends RecyclerView.Adapter<ViewHolder> {
 

@@ -1,31 +1,27 @@
-package com.wafa.android.pei.feature.main;
+package com.dream.android.sample.feature.main;
 
 import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.widget.TextView;
-import com.wafa.android.pei.R;
-import com.wafa.android.pei.base.DIActivity;
-import com.wafa.android.pei.databinding.ActivitySplashBinding;
-import com.wafa.android.pei.di.component.ActivityComponent;
-import com.wafa.android.pei.feature.main.event.SplashEvent;
-import com.wafa.android.pei.lib.utils.ActivityAnimator;
-import com.wafa.android.pei.lib.utils.IntentUtil;
-import com.wafa.android.pei.lib.widget.LoadingImageView;
-import com.wafa.android.pei.model.LaunchItem;
+import com.dream.android.sample.R;
+import com.dream.android.sample.base.DIActivity;
+import com.dream.android.sample.databinding.ActivitySplashBinding;
+import com.dream.android.sample.di.component.ActivityComponent;
+import com.dream.android.sample.lib.utils.ActivityAnimator;
+import com.dream.android.sample.lib.widget.LoadingImageView;
+import com.dream.android.sample.model.LaunchItem;
 
 /**
  * Description:
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
-public class SplashActivity extends DIActivity implements SplashEvent {
+public class SplashActivity extends DIActivity {
 
     private static final long DELAY = 4000;
 
@@ -37,7 +33,6 @@ public class SplashActivity extends DIActivity implements SplashEvent {
         new Handler().postDelayed(this::jumpToMain, DELAY);
         LaunchItem launchItem = new LaunchItem("test", "http://img3.douban.com/img/musician/large/4654.jpg", "http://www.baidu.com");
         binding.setLaunch(launchItem);
-        binding.setEvent(this);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -63,9 +58,6 @@ public class SplashActivity extends DIActivity implements SplashEvent {
         return null;
     }
 
-    /**
-     * 跳转至主页面
-     */
     public void jumpToMain() {
         startActivity(new Intent(this, MainActivity.class));
         new ActivityAnimator().flipHorizontalAnimation(this);
@@ -75,10 +67,5 @@ public class SplashActivity extends DIActivity implements SplashEvent {
     @BindingAdapter({"imageUrl"})
     public static void loadImage(LoadingImageView imageView, String url) {
         imageView.loadImage(url);
-    }
-
-    @Override
-    public void showTargetUrl(LaunchItem item) {
-        startActivity(IntentUtil.Media.newOpenWebBrowserIntent(item.getTargetUrl()));
     }
 }

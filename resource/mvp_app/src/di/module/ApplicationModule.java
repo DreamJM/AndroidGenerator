@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wafa.android.pei.di.module;
+package com.dream.android.sample.di.module;
 
 import android.content.Context;
-import com.wafa.android.pei.MainApplication;
+import com.dream.android.sample.MainApplication;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Singleton;

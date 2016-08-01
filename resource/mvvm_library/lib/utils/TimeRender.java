@@ -1,6 +1,4 @@
-package com.wafa.android.pei.lib.utils;
-
-import com.wafa.android.pei.lib.base.BaseConstants;
+package com.dream.android.sample.lib.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,18 +8,18 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * Description: 时间格式化工具类
+ * Description: Date Tools
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public class TimeRender {
 
     public static final String TODAY = "";
-    public static final String YESTERDAY = "昨天 ";
-    public static final String BEFORE_YESTERDAY = "前天 ";
+    public static final String YESTERDAY = "yesterday ";
+    public static final String BEFORE_YESTERDAY = "before yesterday ";
 
     public static String format(Date date) {
         SimpleDateFormat formatBuilder;

@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.utils;
+package com.dream.android.sample.lib.utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,11 +14,10 @@ import java.io.File;
 import java.util.List;
 
 /**
- * Description:系统界面控制工具类
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public class IntentUtil {

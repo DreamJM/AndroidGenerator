@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.base;
+package com.dream.android.sample.lib.base;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -10,18 +10,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import com.wafa.android.pei.lib.BaseApplication;
-import com.wafa.android.pei.lib.R;
+import com.dream.android.sample.lib.BaseApplication;
+import com.dream.android.sample.lib.R;
 
 /**
  * Description:Base class for every Fragment in this application.
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
-public abstract class BaseFragment extends Fragment implements IBaseView {
+public abstract class BaseFragment extends Fragment {
 
     protected Toolbar titleBar;
 
@@ -45,7 +45,12 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
                 if (getNavigationIcon() != 0) {
                     titleBar.setNavigationIcon(getNavigationIcon());
                 }
-                titleBar.setNavigationOnClickListener(v -> navigationClicked());
+                titleBar.setNavigationOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        navigationClicked();
+                    }
+                });
             }
             onCreateView(savedInstanceState);
         }
@@ -62,55 +67,46 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
 
     protected abstract String getFragmentName();
 
-    @Override
     public void showLoadingToast(String message, boolean cancelable) {
         ((BaseActivity) getActivity()).showLoadingToast(message, cancelable);
     }
 
-    @Override
     public void hideLoadingToast() {
         ((BaseActivity) getActivity()).hideLoadingToast();
     }
 
-    @Override
     public void showLoadingDialog(String message) {
         ((BaseActivity) getActivity()).showLoadingDialog(message);
     }
 
-    @Override
     public void hideDialog() {
         ((BaseActivity) getActivity()).hideDialog();
     }
 
-    @Override
     public void showErrorToast(String message) {
         if (getActivity() != null) {
             ((BaseActivity) getActivity()).showErrorToast(message);
         }
     }
 
-    @Override
     public void showErrorDialog(String title, String message, DialogInterface.OnDismissListener listener) {
         if (getActivity() != null) {
             ((BaseActivity) getActivity()).showErrorDialog(title, message, listener);
         }
     }
 
-    @Override
     public void showSuccessDialog(String title, String message, DialogInterface.OnDismissListener listener) {
         if (getActivity() != null) {
             ((BaseActivity) getActivity()).showSuccessDialog(title, message, listener);
         }
     }
 
-    @Override
     public void showAlertDialog(String title, String message, SweetAlertDialog.OnSweetClickListener confirmClickListener) {
         if (getActivity() != null) {
             ((BaseActivity) getActivity()).showAlertDialog(title, message, confirmClickListener);
         }
     }
 
-    @Override
     public void showAlertDialog(String title, String message, String btnConfirm, SweetAlertDialog.OnSweetClickListener confirmClickListener) {
         if (getActivity() != null) {
             ((BaseActivity) getActivity()).showAlertDialog(title, message, btnConfirm, confirmClickListener);
@@ -132,7 +128,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //Fragment的内存泄漏监测
+        //Fragment memory leak monitor.
         BaseApplication.getRefWatch().watch(this);
     }
 }

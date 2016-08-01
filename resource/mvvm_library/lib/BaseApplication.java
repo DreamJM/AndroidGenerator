@@ -1,39 +1,30 @@
-package com.wafa.android.pei.lib;
+package com.dream.android.sample.lib;
 
 import android.app.Application;
+import com.dream.android.sample.lib.utils.FileUtil;
+import com.dream.android.sample.lib.utils.ViewUtil;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.wafa.android.pei.lib.utils.FileUtil;
-import com.wafa.android.pei.lib.utils.ViewUtil;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 import rx.plugins.RxJavaErrorHandler;
 import rx.plugins.RxJavaPlugins;
 
 import java.io.File;
 
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
-
-/**
- * Description:
- *
- * Copyright: Copyright (c) 2016, All rights reserved.
- *
- * @author jiangm
- * @date 16/5/27
- */
 public abstract class BaseApplication extends Application {
 
     private static BaseApplication instance;
 
     /**
-     * 内存泄漏监测管理类
+     * Memory Leak monitor
      */
     private RefWatcher refWatcher;
 
-    static { //输入Rx的错误信息，供调试使用
+    static { //output error information of RxJava for debug
         RxJavaPlugins.getInstance().registerErrorHandler(new RxJavaErrorHandler() {
             @Override
             public void handleError(Throwable e) {
@@ -52,9 +43,6 @@ public abstract class BaseApplication extends Application {
         refWatcher = LeakCanary.install(this);
     }
 
-    /**
-     * 初始化ImageLoader
-     */
     private void initImage() {
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)

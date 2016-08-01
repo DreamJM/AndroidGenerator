@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wafa.android.pei.di.component;
+package com.dream.android.sample.di.component;
 
-import com.wafa.android.pei.di.module.ActivityModule;
-import com.wafa.android.pei.feature.main.MainActivity;
-import com.wafa.android.pei.feature.main.SplashActivity;
-import com.wafa.android.pei.feature.main.TestFragment;
-import com.wafa.android.pei.lib.base.PerActivity;
+import com.dream.android.sample.di.module.ActivityModule;
+import com.dream.android.sample.feature.main.*;
+import com.dream.android.sample.lib.base.PerActivity;
 import dagger.Component;
 
 /**
@@ -33,5 +31,8 @@ import dagger.Component;
 public interface ActivityComponent {
     void inject(MainActivity mainActivity);
     void inject(SplashActivity splashActivity);
-    void inject(TestFragment testFragment);
+    void inject(MainFragment mainFragment);
+    void inject(Tab1Fragment tab1Fragment);
+    void inject(Tab2Fragment tab2Fragment);
+    void inject(Tab3Fragment tab3Fragment);
 }

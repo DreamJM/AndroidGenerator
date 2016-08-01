@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.widget.pullrefresh.header;
+package com.dream.android.sample.lib.widget.pullrefresh.header;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,10 +11,10 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import com.wafa.android.pei.lib.R;
-import com.wafa.android.pei.lib.widget.pullrefresh.PtrFrameLayout;
-import com.wafa.android.pei.lib.widget.pullrefresh.PtrUIHandler;
-import com.wafa.android.pei.lib.widget.pullrefresh.indicator.PtrIndicator;
+import com.dream.android.sample.lib.R;
+import com.dream.android.sample.lib.widget.pullrefresh.PtrFrameLayout;
+import com.dream.android.sample.lib.widget.pullrefresh.PtrUIHandler;
+import com.dream.android.sample.lib.widget.pullrefresh.indicator.PtrIndicator;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

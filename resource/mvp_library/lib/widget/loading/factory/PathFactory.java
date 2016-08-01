@@ -1,8 +1,8 @@
-package com.wafa.android.pei.lib.widget.loading.factory;
+package com.dream.android.sample.lib.widget.loading.factory;
 
 import android.graphics.Path;
 import android.graphics.Point;
-import com.wafa.android.pei.lib.widget.loading.factory.path.*;
+import com.dream.android.sample.lib.widget.loading.factory.path.*;
 
 /**
  * @author Adrián García Lomas

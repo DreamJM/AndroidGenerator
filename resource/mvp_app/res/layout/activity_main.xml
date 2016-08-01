@@ -51,7 +51,7 @@
                 android:background="@drawable/bg_selector"
                 android:paddingTop="@dimen/dp_5"
                 android:drawableTop="@drawable/tab_msg_selector"
-                android:text="@string/message"
+                android:text="tab2"
                 android:textColor="@color/main_tab_selector"
                 android:textSize="@dimen/sp_11"/>
 
@@ -63,7 +63,7 @@
                 android:paddingTop="@dimen/dp_5"
                 android:background="@drawable/bg_selector"
                 android:drawableTop="@drawable/tab_mine_selector"
-                android:text="tab_end"
+                android:text="tab_3"
                 android:textColor="@color/main_tab_selector"
                 android:textSize="@dimen/sp_11"/>
     </LinearLayout>

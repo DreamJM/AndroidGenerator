@@ -1,17 +1,17 @@
-package com.wafa.android.pei.lib.base;
+package com.dream.android.sample.lib.base;
 
 import android.os.Bundle;
-import com.wafa.android.pei.lib.model.Page;
-import com.wafa.android.pei.lib.widget.CompositePtrView;
-import com.wafa.android.pei.lib.widget.pullrefresh.recyclerview.PtrRecyclerViewAdapter;
-import com.wafa.android.pei.lib.widget.pullrefresh.recyclerview.RecyclerAdapterWithHF;
+import com.dream.android.sample.lib.model.Page;
+import com.dream.android.sample.lib.widget.CompositePtrView;
+import com.dream.android.sample.lib.widget.pullrefresh.recyclerview.PtrRecyclerViewAdapter;
+import com.dream.android.sample.lib.widget.pullrefresh.recyclerview.RecyclerAdapterWithHF;
 
 /**
  * Description:
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author snovajiang
+ * @author Dream
  * @date 16/5/30
  */
 public abstract class BaseListActivity<D, RV extends PtrRecyclerViewAdapter<D>> extends BaseActivity implements CompositePtrView.PtrListener {
@@ -33,7 +33,6 @@ public abstract class BaseListActivity<D, RV extends PtrRecyclerViewAdapter<D>> 
         ptrView.setAdapter(mAdapter);
         ptrView.setListener(this);
         adapter.initData(mData.getData());
-        //加载显示中
         ptrView.showLoading();
         loadData(BaseConstants.START_PAGE);
     }
@@ -68,13 +67,9 @@ public abstract class BaseListActivity<D, RV extends PtrRecyclerViewAdapter<D>> 
 
     }
 
-    /**
-     * 刷新数据信息
-     * @param pageResult 分页的数据信息
-     */
     protected void refreshResult(Page<D> pageResult) {
         if (pageResult.getCurrentPage() == BaseConstants.START_PAGE) {
-            if (mData.getCurrentPage() == BaseConstants.INIT_PAGE) { //如果是初始化获取数据（非刷新情况），则隐藏初始化加载框
+            if (mData.getCurrentPage() == BaseConstants.INIT_PAGE) {
                 ptrView.hideLoading();
             }
             ptrView.refreshComplete();
@@ -91,7 +86,7 @@ public abstract class BaseListActivity<D, RV extends PtrRecyclerViewAdapter<D>> 
 
     protected void showErrorResult() {
         ptrView.refreshComplete();
-        if (mData.getCurrentPage() == BaseConstants.INIT_PAGE) { //初始化时失败，则显示错误页面
+        if (mData.getCurrentPage() == BaseConstants.INIT_PAGE) {
             ptrView.hideLoading();
             ptrView.showError();
         } else {

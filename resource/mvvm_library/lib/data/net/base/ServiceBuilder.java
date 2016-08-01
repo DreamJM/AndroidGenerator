@@ -1,9 +1,9 @@
-package com.wafa.android.pei.lib.data.net.base;
+package com.dream.android.sample.lib.data.net.base;
 
+import com.dream.android.sample.lib.BaseApplication;
+import com.dream.android.sample.lib.executor.JobExecutor;
+import com.dream.android.sample.lib.utils.ApplicationUtil;
 import com.google.gson.*;
-import com.wafa.android.pei.lib.BaseApplication;
-import com.wafa.android.pei.lib.executor.JobExecutor;
-import com.wafa.android.pei.lib.utils.ApplicationUtil;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -17,11 +17,11 @@ import java.lang.reflect.Type;
 import java.util.Date;
 
 /**
- * Description: 网络服务构建类
+ * Description: Network servers builder
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 @Singleton
@@ -29,9 +29,6 @@ public class ServiceBuilder {
 
     public static String SERVER_BASE_URL;
 
-    /**
-     * 服务器通信适配器
-     */
     private Retrofit restAdapter;
 
     @Inject
@@ -43,7 +40,7 @@ public class ServiceBuilder {
                 .baseUrl(SERVER_BASE_URL) //服务器通信地址设置
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().registerTypeAdapter(Date.class, new DateSerializerUtil()).create()))
                 .client(new OkHttpClient.Builder().addInterceptor(logging).build())
-//                .client(new OkHttpClient.Builder().addInterceptor(new Interceptor() { //请求的Request和Response的处理置于此处，还包括超时时间的设置等
+//                .client(new OkHttpClient.Builder().addInterceptor(new Interceptor() { //interceptor form Request and Response
 //                    @Override
 //                    public Response intercept(Chain chain) throws IOException {
 //                        Request request = chain.request();
@@ -54,12 +51,6 @@ public class ServiceBuilder {
                 .build();
     }
 
-    /**
-     * 网络通信服务构建
-     *
-     * @param clazz
-     * @return 网络服务
-     */
     public <T> T build(Class<T> clazz) {
         return restAdapter.create(clazz);
     }

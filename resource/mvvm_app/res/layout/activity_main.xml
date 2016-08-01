@@ -2,7 +2,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="index" type="android.databinding.ObservableInt"/>
-        <variable name="tabEvent" type="com.wafa.android.pei.feature.main.event.TabEvent"/>
+        <variable name="tabEvent" type="com.dream.android.sample.feature.main.event.TabEvent"/>
     </data>
     <LinearLayout
                   android:layout_width="match_parent"
@@ -61,7 +61,7 @@
                     android:background="@drawable/bg_selector"
                     android:paddingTop="@dimen/dp_5"
                     android:drawableTop="@drawable/tab_msg_selector"
-                    android:text="@string/message"
+                    android:text="tab2"
                     android:textColor="@color/main_tab_selector"
                     android:textSize="@dimen/sp_11"
                     android:onClick="@{()->tabEvent.showIndex(2)}"
@@ -75,7 +75,7 @@
                     android:paddingTop="@dimen/dp_5"
                     android:background="@drawable/bg_selector"
                     android:drawableTop="@drawable/tab_mine_selector"
-                    android:text="tab_end"
+                    android:text="tab3"
                     android:textColor="@color/main_tab_selector"
                     android:textSize="@dimen/sp_11"
                     android:onClick="@{()->tabEvent.showIndex(3)}"

@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.base;
+package com.dream.android.sample.lib.base;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -9,15 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import com.wafa.android.pei.lib.BaseApplication;
-import com.wafa.android.pei.lib.R;
+import com.dream.android.sample.lib.BaseApplication;
+import com.dream.android.sample.lib.R;
 
 /**
  * Description:Base class for every Fragment in this application.
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public abstract class BaseFragment extends Fragment {
@@ -41,7 +41,12 @@ public abstract class BaseFragment extends Fragment {
                 if (getNavigationIcon() != 0) {
                     titleBar.setNavigationIcon(getNavigationIcon());
                 }
-                titleBar.setNavigationOnClickListener(v -> navigationClicked());
+                titleBar.setNavigationOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        navigationClicked();
+                    }
+                });
             }
             onCreateView(savedInstanceState);
         }
@@ -115,7 +120,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //Fragment的内存泄漏监测
+        //Fragment memory leak monitor.
         BaseApplication.getRefWatch().watch(this);
     }
 }

@@ -1,13 +1,12 @@
-package com.wafa.android.pei.data.db;
+package com.dream.android.sample.data.db;
 
 import android.database.sqlite.SQLiteDatabase;
-
-import java.util.Map;
-
 import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.AbstractDaoSession;
 import de.greenrobot.dao.identityscope.IdentityScopeType;
 import de.greenrobot.dao.internal.DaoConfig;
+
+import java.util.Map;
 
 
 

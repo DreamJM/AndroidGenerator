@@ -1,47 +1,35 @@
-package com.wafa.android.pei.lib.base;
+package com.dream.android.sample.lib.base;
 
 import android.content.*;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import com.wafa.android.pei.lib.R;
+import com.dream.android.sample.lib.R;
 import com.umeng.analytics.MobclickAgent;
-import com.wafa.android.pei.lib.widget.loading.LoadingDialog;
-
+import com.dream.android.sample.lib.widget.loading.LoadingDialog;
 
 /**
  * Description:Base class for every Activity in this application.
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    /**
-     * 界面Header
-     */
     protected Toolbar titleBar;
 
-    /**
-     * 界面标题栏
-     */
     protected TextView tvBarTitle;
 
-    /**
-     * 信息提示框
-     */
     protected SweetAlertDialog dialog;
 
-    /**
-     * 加载等待框
-     */
-    LoadingDialog loadingDialog;
+    protected LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +39,21 @@ public abstract class BaseActivity extends AppCompatActivity {
         titleBar = (Toolbar) findViewById(R.id.tool_bar);
         tvBarTitle = (TextView) findViewById(R.id.tool_bar_title);
         if (needViewInjection()) {
-            // 使用ButterKnife进行UI的依赖注入
+            // Enable View Injection with ButterKnife
             ButterKnife.bind(this);
         }
-        if (titleBar != null) { //如果xml中有定义header，则进行标题和返回按钮定制
+        if (titleBar != null) { //if layout xml file has include tool_bar.xml for header，customize title and navigation button
             setTitle(getActivityName());
             setSupportActionBar(titleBar);
             if (getNavigationIcon() != 0) {
                 titleBar.setNavigationIcon(getNavigationIcon());
             }
-            titleBar.setNavigationOnClickListener(v -> navigationClicked());
+            titleBar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    navigationClicked();
+                }
+            });
         }
         onCreateView(savedInstanceState);
     }
@@ -68,7 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //友盟统计
+        //introduce umeng sdk for Mobile Analytics
         if(getActivityName() != null) {
             MobclickAgent.onPageStart(getActivityName());
         }
@@ -78,7 +71,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        //友盟统计
         if(getActivityName() != null) {
             MobclickAgent.onPageEnd(getActivityName());
         }
@@ -86,30 +78,29 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * @return 是否需要界面依赖注入
+     * @return whether use ButterKnife for ViewInjection
      */
     protected boolean needViewInjection() {
         return true;
     }
 
     /**
-     * 设置Window特性（因为必须要在setContent之前）
+     * Set Window feature for activity（should be set before "setContentView"）
      */
     protected void setWindowFeature() {}
 
     /**
-     * 界面创建（ContentView已经设置）
      * @param savedInstanceState
      */
     protected abstract void onCreateView(Bundle savedInstanceState);
 
     /**
-     * @return 界面的xml资源
+     * @return xml layout resource id
      */
     protected abstract int getRootViewId();
 
     /**
-     * @return 界面标题
+     * @return activity name
      */
     protected abstract String getActivityName();
 
@@ -129,7 +120,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void showLoadingDialog(String message) {
         if (dialog == null || !dialog.isShowing()) {
-            dialog = new SweetAlertDialog(this).setCancelClickListener(sweetAlertDialog -> sweetAlertDialog.dismiss());
+            dialog = new SweetAlertDialog(this).setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    sweetAlertDialog.dismiss();
+                }
+            });
         }
         dialog.changeAlertType(SweetAlertDialog.PROGRESS_TYPE);
         dialog.setContentText(message).setTitleText("").setCancelText(getString(R.string.cancel)).showCancelButton(false);
@@ -151,7 +147,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void showErrorDialog(String title, String message, DialogInterface.OnDismissListener listener) {
         if (dialog == null || !dialog.isShowing()) {
-            dialog = new SweetAlertDialog(this).setCancelClickListener(sweetAlertDialog -> sweetAlertDialog.dismiss());
+            dialog = new SweetAlertDialog(this).setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    sweetAlertDialog.dismiss();
+                }
+            });
         }
         dialog.changeAlertType(SweetAlertDialog.ERROR_TYPE);
         dialog.setContentText(message).setTitleText(title).showCancelButton(false).setConfirmText(getString(R.string.ensure)).setConfirmClickListener(null);
@@ -163,7 +164,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void showSuccessDialog(String title, String message, DialogInterface.OnDismissListener listener) {
         if (dialog == null || !dialog.isShowing()) {
-            dialog = new SweetAlertDialog(this).setCancelClickListener(sweetAlertDialog -> sweetAlertDialog.dismiss());
+            dialog = new SweetAlertDialog(this).setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    sweetAlertDialog.dismiss();
+                }
+            });
         }
         dialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
         dialog.setContentText(message).setTitleText(title).showCancelButton(false).setConfirmClickListener(null);
@@ -179,7 +185,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void showAlertDialog(String title, String message, String confirmBtn, SweetAlertDialog.OnSweetClickListener confirmClickListener) {
         if (dialog == null || !dialog.isShowing()) {
-            dialog = new SweetAlertDialog(this).setCancelClickListener(sweetAlertDialog -> sweetAlertDialog.dismiss());
+            dialog = new SweetAlertDialog(this).setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    sweetAlertDialog.dismiss();
+                }
+            });
         }
         dialog.changeAlertType(SweetAlertDialog.WARNING_TYPE);
         dialog.setContentText(message).setTitleText(title)
@@ -197,8 +208,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 设置界面标题
-     * @param title
+     * @param title: activity title
      */
     protected void setTitle(String title) {
         if(tvBarTitle != null) {
@@ -207,14 +217,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * @return 定制返回按钮（默认使用返回）
+     * @return drawable resource id for navigation button
      */
     protected int getNavigationIcon() {
         return R.drawable.back;
     }
 
     /**
-     * navigation按钮（左上）点击时间（默认关闭界面）
+     * click event for navigation button(finish activity by default)
      */
     protected void navigationClicked() {
         finish();

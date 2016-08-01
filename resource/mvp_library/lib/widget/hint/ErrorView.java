@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.widget.hint;
+package com.dream.android.sample.lib.widget.hint;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,14 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import com.wafa.android.pei.lib.R;
+import com.dream.android.sample.lib.R;
 
 /**
- * Description:错误显示控件
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/6/1
  */
 public class ErrorView extends FrameLayout {
@@ -61,12 +60,8 @@ public class ErrorView extends FrameLayout {
         if(drawable != null) tvContent.setCompoundDrawables(null, drawable, null, null);
         tvFunc.setVisibility(func != null ? View.VISIBLE : View.INVISIBLE);
         if(func != null) tvFunc.setText(func);
-        tvFunc.setOnClickListener(view -> {
-            if(listener != null) {
-                listener.onErrorClicked();
-            }
-        });
-        setOnClickListener(v -> {});
+        tvFunc.setOnClickListener(onClickListener);
+        setOnClickListener(onClickListener);
     }
 
     public void setErrorContent(String content) {
@@ -81,6 +76,17 @@ public class ErrorView extends FrameLayout {
             tvFunc.setVisibility(View.INVISIBLE);
         }
     }
+
+    private OnClickListener onClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(R.id.btn_func == v.getId()) {
+                if(listener != null) {
+                    listener.onErrorClicked();
+                }
+            }
+        }
+    };
 
     public void setListener(ErrorListener listener) {
         this.listener = listener;

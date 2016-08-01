@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wafa.android.pei.lib.base;
+package com.dream.android.sample.lib.base;
 
 /**
  * Interface representing a contract for clients that contains a component for dependency injection.

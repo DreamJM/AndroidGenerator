@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.base;
+package com.dream.android.sample.lib.base;
 
 import javax.inject.Scope;
 import java.lang.annotation.Retention;
@@ -9,7 +9,7 @@ import java.lang.annotation.RetentionPolicy;
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 @Scope

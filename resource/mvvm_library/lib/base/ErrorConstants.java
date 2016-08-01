@@ -1,11 +1,11 @@
-package com.wafa.android.pei.lib.base;
+package com.dream.android.sample.lib.base;
 
 /**
  * Description:Error Constants that server return
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public class ErrorConstants {

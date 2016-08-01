@@ -1,11 +1,10 @@
-package com.wafa.android.pei.lib.utils;
+package com.dream.android.sample.lib.utils;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 
 /**
- * 判断文件类型
  * MediaScanner helper class.
  */
 public class MediaFile {
@@ -175,7 +174,7 @@ public class MediaFile {
         }
         return false;
     }
-    //根据视频文件路径判断文件类型
+
     public static boolean isVideoFileType(String path) {
         MediaFileType type = getMediaFileType(path);
         if(null != type) {
@@ -183,7 +182,7 @@ public class MediaFile {
         }
         return false;
     }
-    //根据音频文件路径判断文件类型
+
     public static boolean isAudioFileType(String path) {
         MediaFileType type = getMediaFileType(path);
         if(null != type) {
@@ -192,7 +191,6 @@ public class MediaFile {
         return false;
     }
 
-    //根据mime类型查看文件类型
     public static int getFileTypeForMimeType(String mimeType) {
         Integer value = sMimeTypeMap.get(mimeType);
         return (value == null ? 0 : value.intValue());

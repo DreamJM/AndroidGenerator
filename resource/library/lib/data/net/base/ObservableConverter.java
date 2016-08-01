@@ -1,8 +1,8 @@
-package com.wafa.android.pei.lib.data.net.base;
+package com.dream.android.sample.lib.data.net.base;
 
-import com.wafa.android.pei.lib.BaseApplication;
-import com.wafa.android.pei.lib.model.ServerResult;
-import com.wafa.android.pei.lib.utils.ErrorUtil;
+import com.dream.android.sample.lib.BaseApplication;
+import com.dream.android.sample.lib.model.ServerResult;
+import com.dream.android.sample.lib.utils.ErrorUtil;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func1;
@@ -12,7 +12,7 @@ import rx.functions.Func1;
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public class ObservableConverter<T> implements Func1<ServerResult<T>, Observable<T>> {

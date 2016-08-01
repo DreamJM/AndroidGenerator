@@ -1,19 +1,19 @@
-package com.wafa.android.pei.lib.widget.pullrefresh.loadmore;
+package com.dream.android.sample.lib.widget.pullrefresh.loadmore;
 
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import com.wafa.android.pei.lib.widget.pullrefresh.recyclerview.FunctionalRecyclerView;
-import com.wafa.android.pei.lib.widget.pullrefresh.recyclerview.RecyclerAdapterWithHF;
+import com.dream.android.sample.lib.widget.pullrefresh.recyclerview.FunctionalRecyclerView;
+import com.dream.android.sample.lib.widget.pullrefresh.recyclerview.RecyclerAdapterWithHF;
 
 /**
  * Description:
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author snovajiang
+ * @author Dream
  * @date 16/6/1
  */
 public class CustomFunctionViewHandler implements ViewHandler {

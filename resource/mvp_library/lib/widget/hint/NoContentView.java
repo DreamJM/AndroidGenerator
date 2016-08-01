@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.widget.hint;
+package com.dream.android.sample.lib.widget.hint;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,14 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import com.wafa.android.pei.lib.R;
+import com.dream.android.sample.lib.R;
 
 /**
- * Description:空数据页面
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/6/1
  */
 public class NoContentView extends FrameLayout {
@@ -69,17 +68,24 @@ public class NoContentView extends FrameLayout {
         tvFunc.setVisibility(func != null || btnDrawable != null ? View.VISIBLE : View.INVISIBLE);
         if(func != null) tvFunc.setText(func);
         if(btnDrawable != null) tvFunc.setBackgroundDrawable(btnDrawable);
-        tvFunc.setOnClickListener(view -> {
-            if(listener != null) {
-                listener.onEmptyClicked();
-            }
-        });
-        setOnClickListener(v -> {});
+        tvFunc.setOnClickListener(onClickListener);
+        setOnClickListener(onClickListener);
     }
 
     public void setContent(String content) {
         tvContent.setText(content);
     }
+
+    private OnClickListener onClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(R.id.btn_func == v.getId()) {
+                if(listener != null) {
+                    listener.onEmptyClicked();
+                }
+            }
+        }
+    };
 
     public void setImageResource(int resId) {
         tvContent.setCompoundDrawablesWithIntrinsicBounds(0, resId, 0, 0);

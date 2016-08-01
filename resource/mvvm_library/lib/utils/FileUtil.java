@@ -1,33 +1,29 @@
-package com.wafa.android.pei.lib.utils;
+package com.dream.android.sample.lib.utils;
 
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.wafa.android.pei.lib.BaseApplication;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.util.Date;
 
 /**
- * Description:文件管理工具类
+ * Description:File Tools
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public class FileUtil {
@@ -45,7 +41,6 @@ public class FileUtil {
             return new File(getPicDir(context), new Date().getTime() + ".png");
         }
     }
-
 
     public static String getPicDir(Context context) {
         File picDir = new File(getRootDir(context), PIC_DIR);
@@ -66,12 +61,6 @@ public class FileUtil {
         return cachePath;
     }
 
-    /**
-     * 保存文件
-     * @param bm
-     * @param myCaptureFile
-     * @throws IOException
-     */
     public static void saveFile(Bitmap bm, File myCaptureFile) throws IOException {
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
         bm.compress(Bitmap.CompressFormat.PNG, 80, bos);
@@ -83,31 +72,6 @@ public class FileUtil {
         return new File(getPicDir(context), fileName);
     }
 
-    public static Bitmap convertToBitmap(String path, int w, int h) {
-        BitmapFactory.Options opts = new BitmapFactory.Options();
-        // 设置为ture只获取图片大小
-        opts.inJustDecodeBounds = true;
-        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        // 返回为空
-        BitmapFactory.decodeFile(path, opts);
-        int width = opts.outWidth;
-        int height = opts.outHeight;
-        float scaleWidth = 0.f, scaleHeight = 0.f;
-        if (width > w || height > h) {
-            // 缩放
-            scaleWidth = ((float) width) / w;
-            scaleHeight = ((float) height) / h;
-        }
-        opts.inJustDecodeBounds = false;
-        float scale = Math.max(scaleWidth, scaleHeight);
-        opts.inSampleSize = (int)scale;
-        WeakReference<Bitmap> weak = new WeakReference<Bitmap>(BitmapFactory.decodeFile(path, opts));
-        return Bitmap.createScaledBitmap(weak.get(), w, h, true);
-    }
-
-    /**
-     * 专为Android4.4设计的从Uri获取文件绝对路径，以前的方法已不好使
-     */
     @SuppressLint("NewApi")
     public static String getPathByUri(final Context context, final Uri uri) {
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;

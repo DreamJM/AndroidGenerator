@@ -1,19 +1,21 @@
-package com.wafa.android.pei.base;
+package com.dream.android.sample.base;
 
 import android.os.Bundle;
-import com.wafa.android.pei.di.component.ActivityComponent;
-import com.wafa.android.pei.lib.base.BaseFragment;
-import com.wafa.android.pei.lib.base.BaseListFragment;
-import com.wafa.android.pei.lib.base.HasComponent;
-import com.wafa.android.pei.lib.base.Presenter;
-import com.wafa.android.pei.lib.widget.pullrefresh.recyclerview.PtrRecyclerViewAdapter;
+import com.dream.android.sample.di.component.ActivityComponent;
+import com.dream.android.sample.lib.base.*;
+import com.dream.android.sample.lib.widget.pullrefresh.recyclerview.PtrRecyclerViewAdapter;
 
 import javax.inject.Inject;
 
 /**
- * Created by snovajiang on 15/9/13.
+ * Description:base presenter manager for list-style fragment(inject presenter automatically)
+ *
+ * Copyright: Copyright (c) 2016, All rights reserved.
+ *
+ * @author Dream
+ * @date 16/5/27
  */
-public abstract class PresenterListFragment<T extends Presenter, D, RV extends PtrRecyclerViewAdapter<D>> extends BaseListFragment<D, RV> {
+public abstract class PresenterListFragment<T extends CollectionPresenter, D, RV extends PtrRecyclerViewAdapter<D>> extends BaseListFragment<D, RV> {
 
     @Inject
     protected T presenter;

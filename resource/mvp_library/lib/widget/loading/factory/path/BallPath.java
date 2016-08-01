@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.widget.loading.factory.path;
+package com.dream.android.sample.lib.widget.loading.factory.path;
 
 import android.graphics.Path;
 import android.graphics.Point;

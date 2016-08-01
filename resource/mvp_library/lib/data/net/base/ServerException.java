@@ -1,11 +1,11 @@
-package com.wafa.android.pei.lib.data.net.base;
+package com.dream.android.sample.lib.data.net.base;
 
 /**
- * Description: Defination of Server Error
+ * Description: Definition of Server Error
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public class ServerException extends Exception {

@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.widget.loading;
+package com.dream.android.sample.lib.widget.loading;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,11 +7,11 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.View;
-import com.wafa.android.pei.lib.R;
-import com.wafa.android.pei.lib.widget.loading.animator.AbstractBallAnimator;
-import com.wafa.android.pei.lib.widget.loading.animator.BallPathAnimator;
-import com.wafa.android.pei.lib.widget.loading.animator.BallSizeAnimator;
-import com.wafa.android.pei.lib.widget.loading.factory.PathFactory;
+import com.dream.android.sample.lib.R;
+import com.dream.android.sample.lib.widget.loading.animator.AbstractBallAnimator;
+import com.dream.android.sample.lib.widget.loading.animator.BallPathAnimator;
+import com.dream.android.sample.lib.widget.loading.animator.BallSizeAnimator;
+import com.dream.android.sample.lib.widget.loading.factory.PathFactory;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

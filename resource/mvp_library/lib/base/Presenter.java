@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.base;
+package com.dream.android.sample.lib.base;
 
 /**
  * Interface representing a Presenter in a model view presenter (MVP) pattern.

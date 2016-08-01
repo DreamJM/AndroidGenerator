@@ -1,6 +1,5 @@
-package com.wafa.android.pei.lib.utils;
+package com.dream.android.sample.lib.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.DisplayMetrics;
@@ -17,22 +16,20 @@ import android.widget.ListView;
 import java.lang.reflect.Field;
 
 /**
- * Description:界面工具类
+ * Description:View Tools
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public class ViewUtil {
-
 
     public static int SCREEN_WIDTH_PIXELS;
     public static int SCREEN_HEIGHT_PIXELS;
     public static float SCREEN_DENSITY;
     public static int SCREEN_WIDTH_DP;
     public static int SCREEN_HEIGHT_DP;
-
 
     public static void init(Context context) {
         DisplayMetrics dm = new DisplayMetrics();
@@ -45,12 +42,6 @@ public class ViewUtil {
         SCREEN_HEIGHT_DP = (int) (SCREEN_HEIGHT_PIXELS / dm.density);
     }
 
-    /**
-     * 获取控件的高度，如果获取的高度为0，则重新计算尺寸后再返回高度
-     *
-     * @param view
-     * @return
-     */
     public static int getViewMeasuredHeight(View view) {
         int height = view.getMeasuredHeight();
         if(0 < height){
@@ -60,12 +51,6 @@ public class ViewUtil {
         return view.getMeasuredHeight();
     }
 
-    /**
-     * 获取控件的宽度，如果获取的宽度为0，则重新计算尺寸后再返回宽度
-     *
-     * @param view
-     * @return
-     */
     public static int getViewMeasuredWidth(View view) {
         int width = view.getMeasuredWidth();
         if(width > 0) {
@@ -75,22 +60,12 @@ public class ViewUtil {
         return view.getMeasuredWidth();
     }
 
-    /**
-     * 测量控件的尺寸
-     *
-     * @param view
-     */
     public static void calcViewMeasure(View view) {
         int width = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         int expandSpec = View.MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2, View.MeasureSpec.AT_MOST);
         view.measure(width, expandSpec);
     }
 
-    /**
-     * 将View输出成图片
-     * @param view
-     * @return
-     */
     public static Bitmap convertViewToBitmap(View view) {
         view.setDrawingCacheEnabled(true);
         view.buildDrawingCache();
@@ -98,10 +73,6 @@ public class ViewUtil {
         return b;
     }
 
-    /**
-     * 预先固定ListView的高度
-     * @param listView
-     */
     public static void calculateListViewHeight(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null)
@@ -122,11 +93,6 @@ public class ViewUtil {
         listView.requestLayout();
     }
 
-    /**
-     * 预先固定GridView的高度
-     * @param gridView
-     * @param numColumns gridview的列数
-     */
     public static void calculateGridViewHeight(GridView gridView, int numColumns) {
         ListAdapter listAdapter = gridView.getAdapter();
         if (listAdapter == null)
@@ -147,12 +113,8 @@ public class ViewUtil {
         gridView.requestLayout();
     }
 
-    /**
-     * 获取顶部状态栏高度
-     * @param context
-     * @return
-     */
-    public static int getBarHeight(Context context){
+
+    public static int getStatusBarHeight(Context context){
         Class<?> c = null;
         Object obj = null;
         Field field = null;
@@ -169,30 +131,16 @@ public class ViewUtil {
         return sbar;
     }
 
-    /**
-     * 显示软键盘
-     * @param context
-     * @param view
-     */
     public static void showSoftKeyboard(Context context, View view) {
         InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(view, 0);
     }
 
-    /**
-     * 隐藏软键盘
-     * @param context
-     * @param view
-     */
     public static void hideSoftKeyboard(Context context, View view) {
         InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    /**
-     * View的展开动画效果
-     * @param v
-     */
     public static void expand(final View v) {
         v.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         final int targetHeight = v.getMeasuredHeight();
@@ -219,10 +167,6 @@ public class ViewUtil {
         v.startAnimation(a);
     }
 
-    /**
-     * View的收起动画效果
-     * @param v
-     */
     public static void collapse(final View v) {
         final int initialHeight = v.getMeasuredHeight();
         Animation a = new Animation()

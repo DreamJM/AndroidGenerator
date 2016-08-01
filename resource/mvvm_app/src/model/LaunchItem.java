@@ -1,17 +1,15 @@
-package com.wafa.android.pei.model;
+package com.dream.android.sample.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import com.wafa.android.pei.BR;
+import com.dream.android.sample.BR;
 
 /**
  * Description:
  * <p>
  * Copyright: Copyright (c) 2016, All rights reserved.
- * <p>
- * Company:中配联电子商务南京有限公司
  *
- * @author snovajiang
+ * @author Dream
  * @date 16/7/25
  */
 public class LaunchItem extends BaseObservable {

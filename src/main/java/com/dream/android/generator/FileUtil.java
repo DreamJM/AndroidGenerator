@@ -53,7 +53,7 @@ public class FileUtil {
         }
     }
 
-    public static void copyFile(File toFile, File fromFile, String packageName) {// 复制文件
+    public static void copyFile(File toFile, File fromFile, String packageName) {
         if (toFile.exists()) {
             System.out.println("file " + toFile.getAbsolutePath() + " already exists, skip！");
             return;
@@ -63,12 +63,12 @@ public class FileUtil {
         System.out.println("copy file " + fromFile.getAbsolutePath() + " to "
                 + toFile.getAbsolutePath());
         try {
-            if(fromFile.getName().endsWith(".java")) {
+            if(fromFile.getName().endsWith(".java") || fromFile.getName().endsWith(".xml")) {
                 BufferedReader br = new BufferedReader(new FileReader(fromFile));
                 BufferedWriter bw = new BufferedWriter(new FileWriter(toFile));
                 String line = "";
                 while ((line = br.readLine()) != null) {
-                    line = line.replaceAll("com.wafa.android.pei", packageName);
+                    line = line.replaceAll("com.dream.android.sample", packageName);
                     bw.write(line);
                     bw.newLine();
                 }

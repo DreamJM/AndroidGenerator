@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.base;
+package com.dream.android.sample.lib.base;
 
 import android.content.DialogInterface;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -8,7 +8,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public interface IBaseView {

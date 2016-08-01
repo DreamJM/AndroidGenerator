@@ -1,11 +1,11 @@
-package com.wafa.android.pei.lib.widget.loading.animator;
+package com.dream.android.sample.lib.widget.loading.animator;
 
 import android.animation.ValueAnimator;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.view.animation.BaseInterpolator;
 import android.view.animation.LinearInterpolator;
-import com.wafa.android.pei.lib.widget.loading.Ball;
+import com.dream.android.sample.lib.widget.loading.Ball;
 
 /**
  * Given a Path object trace the points and use value animator

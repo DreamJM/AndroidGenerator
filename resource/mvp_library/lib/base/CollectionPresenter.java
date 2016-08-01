@@ -1,19 +1,17 @@
-package com.wafa.android.pei.lib.base;
+package com.dream.android.sample.lib.base;
 
-import com.wafa.android.pei.lib.BaseApplication;
-import com.wafa.android.pei.lib.R;
-import com.wafa.android.pei.lib.model.Page;
-import com.wafa.android.pei.lib.widget.CompositePtrView;
-import com.wafa.android.pei.lib.widget.pullrefresh.PtrDefaultHandler;
-import com.wafa.android.pei.lib.widget.pullrefresh.PtrFrameLayout;
-import com.wafa.android.pei.lib.widget.pullrefresh.loadmore.OnLoadMoreListener;
+import com.dream.android.sample.lib.BaseApplication;
+import com.dream.android.sample.lib.R;
+import com.dream.android.sample.lib.model.Page;
+import com.dream.android.sample.lib.widget.CompositePtrView;
+import com.dream.android.sample.lib.widget.pullrefresh.PtrDefaultHandler;
+import com.dream.android.sample.lib.widget.pullrefresh.PtrFrameLayout;
+import com.dream.android.sample.lib.widget.pullrefresh.loadmore.OnLoadMoreListener;
 
 /**
- * Description:列表的表现层基类
- *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public abstract class CollectionPresenter<T> implements Presenter, CompositePtrView.PtrListener {
@@ -27,7 +25,6 @@ public abstract class CollectionPresenter<T> implements Presenter, CompositePtrV
         view.initCallbacks(this);
         view.initData(mData.getData());
         view.showLoading();
-        //初始化数据
         loadData(BaseConstants.START_PAGE);
     }
 
@@ -54,13 +51,9 @@ public abstract class CollectionPresenter<T> implements Presenter, CompositePtrV
 
     }
 
-    /**
-     * 刷新数据信息
-     * @param pageResult 分页的数据信息
-     */
     public void refreshResult(Page<T> pageResult) {
         if (pageResult.getCurrentPage() == BaseConstants.START_PAGE) {
-            if (mData.getCurrentPage() == BaseConstants.INIT_PAGE) { //如果是初始化获取数据（非刷新情况），则隐藏初始化加载框
+            if (mData.getCurrentPage() == BaseConstants.INIT_PAGE) {
                 view.hideLoading();
             }
             view.refreshComplete();

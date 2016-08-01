@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.widget.pullrefresh.recyclerview;
+package com.dream.android.sample.lib.widget.pullrefresh.recyclerview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,16 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import com.wafa.android.pei.lib.R;
-import com.wafa.android.pei.lib.widget.hint.ErrorView;
-import com.wafa.android.pei.lib.widget.hint.NoContentView;
+import com.dream.android.sample.lib.R;
+import com.dream.android.sample.lib.widget.hint.ErrorView;
+import com.dream.android.sample.lib.widget.hint.NoContentView;
 
 /**
  * Description:
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author snovajiang
+ * @author Dream
  * @date 16/6/1
  */
 public class FunctionalRecyclerView extends FrameLayout {

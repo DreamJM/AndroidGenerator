@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wafa.android.pei.di.module;
+package com.dream.android.sample.di.module;
 
 import android.app.Activity;
-import com.wafa.android.pei.lib.base.BaseActivity;
-import com.wafa.android.pei.lib.base.PerActivity;
+import com.dream.android.sample.lib.base.BaseActivity;
+import com.dream.android.sample.lib.base.PerActivity;
 import dagger.Module;
 import dagger.Provides;
 

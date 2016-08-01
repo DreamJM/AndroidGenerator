@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.widget.loading;
+package com.dream.android.sample.lib.widget.loading;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

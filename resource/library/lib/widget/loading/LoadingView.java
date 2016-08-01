@@ -1,18 +1,17 @@
-package com.wafa.android.pei.lib.widget.loading;
+package com.dream.android.sample.lib.widget.loading;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import com.wafa.android.pei.lib.R;
+import com.dream.android.sample.lib.R;
 
 /**
- * Description: 三色球旋转效果的加载控件
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public class LoadingView extends FrameLayout {
@@ -34,12 +33,13 @@ public class LoadingView extends FrameLayout {
 
     private void init(Context context, AttributeSet attrs) {
         LayoutInflater.from(getContext()).inflate(R.layout.layout_loading, this);
-        setOnClickListener(this::block);
+        setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {}
+        });
     }
 
     public void setHint(String hint) {
 
     }
-
-    private void block(View v) {}
 }

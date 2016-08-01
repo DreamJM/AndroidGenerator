@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.utils;
+package com.dream.android.sample.lib.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

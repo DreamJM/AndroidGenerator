@@ -1,12 +1,17 @@
-package com.wafa.android.pei.base;
+package com.dream.android.sample.base;
 
 import android.os.Bundle;
-import com.wafa.android.pei.di.component.ActivityComponent;
-import com.wafa.android.pei.lib.base.BaseFragment;
-import com.wafa.android.pei.lib.base.HasComponent;
+import com.dream.android.sample.di.component.ActivityComponent;
+import com.dream.android.sample.lib.base.BaseFragment;
+import com.dream.android.sample.lib.base.HasComponent;
 
 /**
- * Created by snovajiang on 15/9/13.
+ * Description:base dependency injection manager class
+ *
+ * Copyright: Copyright (c) 2016, All rights reserved.
+ *
+ * @author Dream
+ * @date 16/5/27
  */
 public abstract class DIFragment extends BaseFragment {
 

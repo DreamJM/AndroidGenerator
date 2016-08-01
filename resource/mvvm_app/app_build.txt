@@ -34,13 +34,13 @@ android {
             proguardFile getDefaultProguardFile('proguard-android.txt')
             proguardFile '../proguard-rules.txt'
             signingConfig signingConfigs.release
-            manifestPlaceholders = [ SERVER_URL:"http://app.7pei7.com" ]
+            manifestPlaceholders = [ SERVER_URL:"https://api.github.com" ]
         }
         debug {
             debuggable true
             testCoverageEnabled true
             signingConfig signingConfigs.debug
-            manifestPlaceholders = [ SERVER_URL:"http://192.168.1.11:2080" ]
+            manifestPlaceholders = [ SERVER_URL:"https://api.github.com" ]
         }
     }
 

@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.widget;
+package com.dream.android.sample.lib.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,39 +9,29 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.dream.android.sample.lib.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-import com.wafa.android.pei.lib.R;
 
 /**
- * Description:图片加载控件，带有转菊花的加载效果
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/6/1
  */
 public class LoadingImageView extends FrameLayout {
 
-    /**
-     * 加载图片类型定义（根据类型来显示不同默认图片）
-     */
     public static final int TYPE_NORMAL = 0;
     public static final int TYPE_AVATAR = 1;
 
-    /**
-     * 图片形状给定义（矩形、原型、圆角矩形）
-     */
     private static final int SHAPE_RECT = 0;
     private static final int SHAPE_CIRCLE = 1;
     private static final int SHAPE_ROUND_CORNER = 2;
 
-    /**
-     * 图片剪裁式样
-     */
     private static final int SCALE_CROP = 0;
     private static final int SCALE_CENTER = 1;
     private static final int SCALE_INSIDE = 2;
@@ -62,9 +52,6 @@ public class LoadingImageView extends FrameLayout {
 
     private String loadingText;
 
-    /**
-     * 图片加载监听器
-     */
     ImageLoadingListener listener = new ImageLoadingListener() {
         @Override
         public void onLoadingStarted(String s, View view) {

@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.utils;
+package com.dream.android.sample.lib.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,11 +10,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * Description:图片处理工具类
+ * Description:Image Tools
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public class ImageUtil {
@@ -30,13 +30,8 @@ public class ImageUtil {
     private static final int COMPRESS_WIDTH = 800;
     private static final int COMPRESS_HEIGHT = 600;
 
-    private static final long MAX_SIZE = 350 * 1024; //最大大小为400kb
+    private static final long MAX_SIZE = 350 * 1024;
 
-    /**
-     * 压缩图片
-     * @param srcPath 图片本地路径
-     * @return error code
-     */
     public static int compressImageAndSave(String srcPath, String targetPath) {
         File srcFile = new File(srcPath);
         if(srcFile.length() > MAX_SIZE) {
@@ -51,11 +46,6 @@ public class ImageUtil {
         }
     }
 
-    /**
-     * 获取图片的角度信息
-     * @param imgPath 图片地址
-     * @return 返回0-360的角度信息
-     */
     public static int getBitmapDegree(String imgPath) {
         ExifInterface exif = null;
         try {
@@ -65,10 +55,8 @@ public class ImageUtil {
         }
         int degree = 0;
         if (exif != null) {
-            // 读取图片中相机方向信息
             int ori = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
                     ExifInterface.ORIENTATION_UNDEFINED);
-            // 计算旋转角度
             switch (ori) {
                 case ExifInterface.ORIENTATION_ROTATE_90:
                     degree = 90;
@@ -87,15 +75,8 @@ public class ImageUtil {
         return degree;
     }
 
-    /**
-     * 设置图片的角度
-     * @param bitmap 图片对象bitmap
-     * @param degree 0-360的角度
-     * @return 设置角度完成的图片对象bitmap
-     */
     public static Bitmap setBitmapDegree(Bitmap bitmap, int degree){
         if (degree != 0) {
-            // 旋转图片
             Matrix m = new Matrix();
             m.postRotate(degree);
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),

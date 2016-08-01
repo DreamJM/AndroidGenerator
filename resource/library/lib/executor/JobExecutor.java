@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.executor;
+package com.dream.android.sample.lib.executor;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

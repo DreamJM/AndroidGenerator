@@ -1,6 +1,6 @@
-package com.wafa.android.pei.lib.executor;
+package com.dream.android.sample.lib.executor;
 
-import com.wafa.android.pei.lib.data.net.base.ServerException;
+import com.dream.android.sample.lib.data.net.base.ServerException;
 import rx.Observer;
 
 public abstract class DefaultObserver<T> implements Observer<T> {
@@ -19,7 +19,7 @@ public abstract class DefaultObserver<T> implements Observer<T> {
     public void onError(Throwable e) {
         if (e instanceof ServerException) {
             onServerError((ServerException) e);
-        } else { //网络错误、JSON转换错误或者HTTP错误
+        } else {
             onInternalError(e);
         }
     }

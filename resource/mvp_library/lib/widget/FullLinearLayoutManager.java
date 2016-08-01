@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.widget;
+package com.dream.android.sample.lib.widget;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,11 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Description:自动撑开的列表布局管理器
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/6/1
  */
 public class FullLinearLayoutManager extends LinearLayoutManager {

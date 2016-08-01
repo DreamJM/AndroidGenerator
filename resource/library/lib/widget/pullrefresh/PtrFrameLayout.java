@@ -1,4 +1,4 @@
-package com.wafa.android.pei.lib.widget.pullrefresh;
+package com.dream.android.sample.lib.widget.pullrefresh;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,10 +7,10 @@ import android.util.AttributeSet;
 import android.view.*;
 import android.widget.Scroller;
 import android.widget.TextView;
-import com.wafa.android.pei.lib.R;
-import com.wafa.android.pei.lib.widget.pullrefresh.recyclerview.FunctionalRecyclerView;
-import com.wafa.android.pei.lib.widget.pullrefresh.indicator.PtrIndicator;
-import com.wafa.android.pei.lib.widget.pullrefresh.loadmore.*;
+import com.dream.android.sample.lib.R;
+import com.dream.android.sample.lib.widget.pullrefresh.recyclerview.FunctionalRecyclerView;
+import com.dream.android.sample.lib.widget.pullrefresh.indicator.PtrIndicator;
+import com.dream.android.sample.lib.widget.pullrefresh.loadmore.*;
 
 /**
  * This layout view for "Pull to Refresh(Ptr)" support all of the view, you can contain everything you want.

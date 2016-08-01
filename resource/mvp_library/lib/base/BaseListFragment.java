@@ -1,9 +1,9 @@
-package com.wafa.android.pei.lib.base;
+package com.dream.android.sample.lib.base;
 
 import android.os.Bundle;
-import com.wafa.android.pei.lib.widget.CompositePtrView;
-import com.wafa.android.pei.lib.widget.pullrefresh.recyclerview.PtrRecyclerViewAdapter;
-import com.wafa.android.pei.lib.widget.pullrefresh.recyclerview.RecyclerAdapterWithHF;
+import com.dream.android.sample.lib.widget.CompositePtrView;
+import com.dream.android.sample.lib.widget.pullrefresh.recyclerview.PtrRecyclerViewAdapter;
+import com.dream.android.sample.lib.widget.pullrefresh.recyclerview.RecyclerAdapterWithHF;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author snovajiang
+ * @author Dream
  * @date 16/5/30
  */
 public abstract class BaseListFragment<D, RV extends PtrRecyclerViewAdapter<D>> extends BaseFragment {

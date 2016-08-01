@@ -1,6 +1,6 @@
-package com.wafa.android.pei.lib.widget.loading.animator;
+package com.dream.android.sample.lib.widget.loading.animator;
 
-import com.wafa.android.pei.lib.widget.loading.Ball;
+import com.dream.android.sample.lib.widget.loading.Ball;
 
 import java.util.ArrayList;
 import java.util.List;

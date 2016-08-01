@@ -1,47 +1,32 @@
-package com.wafa.android.pei.lib.model;
+package com.dream.android.sample.lib.model;
 
-import com.wafa.android.pei.lib.base.BaseConstants;
+import com.dream.android.sample.lib.base.BaseConstants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Description:分页信息类
+ * Description:Page info
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public class Page<T> {
 
-    /**
-     * 页大小（每一页的数据量）
-     */
     private int pageSize;
 
-    /**
-     * 当前页码
-     */
     private int currentPage;
 
-    /**
-     * 总页数
-     */
     private int totalPage;
 
-    /**
-     * 总数据量
-     */
     private int totalCount;
 
-    /**
-     * 数据
-     */
     private List<T> data;
 
     public Page() {
-        currentPage = BaseConstants.INIT_PAGE;//设置为初始状态
+        currentPage = BaseConstants.INIT_PAGE;
         data = new ArrayList<>();
     }
 
@@ -83,8 +68,8 @@ public class Page<T> {
     }
 
     /**
-     * 直接添加页码数据
-     * @param page 指定页码数据
+     * add page data
+     * @param page data by page
      */
     public void addPage(Page<T> page) {
         this.pageSize = page.pageSize;
@@ -96,24 +81,18 @@ public class Page<T> {
         }
     }
 
-    /**
-     * 删除指定位置的数据
-     */
     public void removeData(int index) {
         if(index > 0 && index < data.size() - 1) {
             data.remove(index);
         }
     }
 
-    /**
-     * 删除数据
-     */
     public void removeData(T t) {
         data.remove(t);
     }
 
     /**
-     * 清空数据
+     * clear all datas
      */
     public void clear() {
         this.pageSize = 0;
@@ -124,10 +103,10 @@ public class Page<T> {
     }
 
     /**
-     * 能否加载更多
+     * @return whether load more action is available or not
      */
     public boolean canLoadMore() {
-        return currentPage < totalPage - 1; //目前根据页码来判断（逻辑可变）
+        return currentPage < totalPage - 1;
     }
 
 }

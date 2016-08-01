@@ -1,15 +1,14 @@
-package com.wafa.android.pei.lib.widget.loading;
+package com.dream.android.sample.lib.widget.loading;
 
 import android.app.Dialog;
 import android.content.Context;
-import com.wafa.android.pei.lib.R;
+import com.dream.android.sample.lib.R;
 
 /**
- * Description: 三色球旋转效果的加载对话框
  *
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public class LoadingDialog extends Dialog {

@@ -1,4 +1,4 @@
-package com.wafa.android.pei.feature.main;
+package com.dream.android.sample.feature.main;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -7,19 +7,19 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ObservableInt;
 import android.os.Bundle;
 import android.view.View;
-import com.wafa.android.pei.R;
-import com.wafa.android.pei.base.DIActivity;
-import com.wafa.android.pei.databinding.ActivityMainBinding;
-import com.wafa.android.pei.di.component.ActivityComponent;
-import com.wafa.android.pei.feature.main.event.TabEvent;
-import com.wafa.android.pei.lib.base.BaseFragment;
+import com.dream.android.sample.R;
+import com.dream.android.sample.base.DIActivity;
+import com.dream.android.sample.databinding.ActivityMainBinding;
+import com.dream.android.sample.di.component.ActivityComponent;
+import com.dream.android.sample.feature.main.event.TabEvent;
+import com.dream.android.sample.lib.base.BaseFragment;
 
 /**
  * Description:
  * <p>
  * Copyright: Copyright (c) 2016, All rights reserved.
  *
- * @author jiangm
+ * @author Dream
  * @date 16/5/27
  */
 public class MainActivity extends DIActivity implements TabEvent{
@@ -47,14 +47,14 @@ public class MainActivity extends DIActivity implements TabEvent{
         FragmentManager fm = getFragmentManager();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (savedInstanceState == null) {
-            fragments = new BaseFragment[]{TestFragment.newInstance(0), TestFragment.newInstance(1), TestFragment.newInstance(2), TestFragment.newInstance(3)};
+            fragments = new BaseFragment[]{MainFragment.newInstance(), Tab1Fragment.newInstance(), Tab2Fragment.newInstance(), Tab3Fragment.newInstance()};
             for (int i = 0; i < fragments.length; i++) {
                 transaction.add(R.id.fragment_container, fragments[i], FG_TAGS[i]);
                 if (i != currentIndex.get()) {
                     transaction.hide(fragments[i]);
                 }
             }
-        } else { //异常销毁后重建,防止fragment重叠
+        } else {
             fragments = new BaseFragment[]{(BaseFragment) fm.findFragmentByTag(FG_TAGS[0]), (BaseFragment) fm.findFragmentByTag(FG_TAGS[1]), (BaseFragment) fm.findFragmentByTag(FG_TAGS[2]), (BaseFragment) fm.findFragmentByTag(FG_TAGS[3])};
             for (BaseFragment fragment : fragments) {
                 transaction.hide(fragment);

@@ -1,4 +1,4 @@
-package com.wafa.android.pei.data.db;
+package com.dream.android.sample.data.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

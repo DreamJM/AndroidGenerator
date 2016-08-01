@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wafa.android.pei.di.component;
+package com.dream.android.sample.di.component;
 
 import android.content.Context;
-import com.wafa.android.pei.data.TestRepository;
-import com.wafa.android.pei.di.module.ApplicationModule;
-import com.wafa.android.pei.lib.executor.JobExecutor;
-import com.wafa.android.pei.lib.executor.UIThread;
+import com.dream.android.sample.data.GithubRepository;
+import com.dream.android.sample.di.module.ApplicationModule;
+import com.dream.android.sample.lib.executor.JobExecutor;
+import com.dream.android.sample.lib.executor.UIThread;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -34,5 +34,5 @@ public interface ApplicationComponent {
   Context context();
   UIThread uiThread();
   JobExecutor jobExecutor();
-  TestRepository testRepository();
+  GithubRepository testRepository();
 }
