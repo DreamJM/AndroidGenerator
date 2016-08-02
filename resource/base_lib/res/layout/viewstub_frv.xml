@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dream.android.sample.lib.widget.pullrefresh.recyclerview.FunctionalRecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rv_function"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>

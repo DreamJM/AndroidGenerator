@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="contributor" type="com.dream.android.sample.model.Contributor"/>
+    </data>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_16">
+
+        <com.dream.android.sample.lib.widget.LoadingImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40"
+                app:imageType="avatar"
+                app:imageShape="circle"
+                app:imageUrl="@{contributor.avatar_url}"/>
+
+        <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_16"
+                android:textColor="@android:color/black"
+                android:text="@{contributor.login}"/>
+    </LinearLayout>
+</layout>

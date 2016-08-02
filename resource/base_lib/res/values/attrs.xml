@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CompositePtrView">
+        <attr name="cptr_ncContent" format="string"/>
+        <attr name="cptr_ncBtnText" format="string"/>
+
+        <attr name="cptr_errorContent" format="string"/>
+        <attr name="cptr_errorBtnText" format="string"/>
+
+        <attr name="cptr_loading" format="string"/>
+
+        <attr name="cptr_ptr_enable" format="boolean"/>
+        <attr name="cptr_loadmore_enable" format="boolean"/>
+        <attr name="cptr_loading_enable" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="FunctionalRecyclerView">
+        <attr name="frv_ncContent" format="string"/>
+        <attr name="frv_ncBtnText" format="string"/>
+
+        <attr name="frv_errorContent" format="string"/>
+        <attr name="frv_errorBtnText" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="NoContentView">
+        <attr name="ncContent" format="string"/>
+        <attr name="ncColor" format="color"/>
+        <attr name="ncSize" format="dimension"/>
+        <attr name="ncImage" format="reference"/>
+        <attr name="ncBtnBg" format="reference"/>
+        <attr name="ncBtnText" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="ErrorView">
+        <attr name="errorContent" format="string"/>
+        <attr name="errorColor" format="color"/>
+        <attr name="errorSize" format="dimension"/>
+        <attr name="errorImage" format="reference"/>
+        <attr name="errorBtnBg" format="reference"/>
+        <attr name="errorBtnText" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="LoadingBalls">
+        <attr name="balls" format="integer"/>
+        <attr name="movement_cycle_time" format="integer"/>
+        <attr name="size_cycle_time" format="integer"/>
+        <attr name="ball_colors" format="reference"/>
+        <attr name="ball_size" format="dimension"/>
+        <attr name="enable_size_animation" format="boolean"/>
+        <attr name="min_ball_size" format="dimension"/>
+        <attr name="max_ball_size" format="dimension"/>
+        <attr name="path" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="PtrFrameLayout">
+        <!-- Optional. If you put header and content in xml, you can you these to specify them. -->
+        <attr name="ptr_header" format="reference" />
+        <attr name="ptr_content" format="reference" />
+
+        <!-- the resistance when you are moving the frame -->
+        <attr name="ptr_resistance" format="float" />
+
+        <!-- the ration of the height of the header to trigger refresh -->
+        <attr name="ptr_ratio_of_header_height_to_refresh" format="float" />
+
+        <attr name="ptr_duration_to_close" format="integer" />
+        <attr name="ptr_duration_to_close_header" format="integer" />
+
+        <!-- pull to refresh, otherwise release to refresh, default is release to refresh -->
+        <attr name="ptr_pull_to_fresh" format="boolean" />
+
+        <!-- keep header when refreshing-->
+        <attr name="ptr_keep_header_when_refresh" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="PtrClassicHeader">
+        <attr name="ptr_rotate_ani_time" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="LoadingImageView">
+        <attr name="imageType" format="enum">
+            <enum name="normal" value="0"/>
+            <enum name="avatar" value="1"/>
+        </attr>
+        <attr name="loadingText" format="string"/>
+        <attr name="imageShape" format="enum">
+            <enum name="rect" value="0"/>
+            <enum name="circle" value="1"/>
+            <enum name="roundCorner" value="2"/>
+        </attr>
+        <attr name="imageScale" format="enum">
+            <enum name="crop" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="inside" value="2"/>
+        </attr>
+    </declare-styleable>
+
+</resources>

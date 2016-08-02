@@ -14,4 +14,21 @@ allprojects {
 
 apply plugin: 'java'
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.dream.android.generator.AndroidGenerator'
+    }
+}
+
+task clearPj(type:Delete){
+    delete 'AndroidGenerator.jar'
+}
+
+task release(type: Copy,dependsOn: [jar,clearPj]) {
+    from('build/libs') {
+        include '*.jar'
+    }
+    into ('.')
+}
+
 

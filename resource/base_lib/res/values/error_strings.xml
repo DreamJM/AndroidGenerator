@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="network_error">network error</string>
+
+    <string name="MSG_E1001001">account or password error</string>
+
+</resources>
