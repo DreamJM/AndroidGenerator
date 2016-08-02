@@ -3,7 +3,7 @@
     <string name="cube_ptr_pull_down">pull down</string>
     <string name="cube_ptr_pull_down_to_refresh">pull to refresh</string>
     <string name="cube_ptr_release_to_refresh">release to refresh</string>
-    <string name="cube_ptr_refreshing">load complete...</string>
+    <string name="cube_ptr_refreshing">load complete&#8230;</string>
     <string name="cube_ptr_refresh_complete">update complete.</string>
 
     <string name="cube_ptr_last_update">last update:&#160;</string>
@@ -11,14 +11,14 @@
     <string name="cube_ptr_minutes_ago">&#160; minutes ago</string>
     <string name="cube_ptr_hours_ago">&#160; hours ago</string>
 
-    <string name="default_no_content_hint">Can't find the corresponding data！</string>
+    <string name="default_no_content_hint">Can\'t find the corresponding data！</string>
     <string name="default_error_hint">Unfortunately, it failed to load！</string>
-    <string name="default_loading_hint">Hard Loading...</string>
+    <string name="default_loading_hint">Hard Loading&#8230;</string>
 
     <string name="click_retry">retry</string>
 
-    <string name="ensure">ensure</string>
-    <string name="cancel">cancel</string>
+    <string name="ensure">Ensure</string>
+    <string name="cancel">Cancel</string>
 
     <string name="pic_loading">Image Loading</string>
 </resources>
