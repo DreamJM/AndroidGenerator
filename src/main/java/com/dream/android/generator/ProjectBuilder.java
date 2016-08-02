@@ -22,7 +22,12 @@ import java.util.Map;
 
 public class ProjectBuilder {
 
-    private static final String JAVA_VERSION = "JavaVersion.VERSION_1_8";
+    private static final String JAVA_8_VERSION = "JavaVersion.VERSION_1_8";
+    private static final String JAVA_7_VERSION = "JavaVersion.VERSION_1_7";
+
+    private static final int TYPE_MVVM = 1;
+    private static final int TYPE_MVP = 2;
+    private static final int TYPE_NORMAL = 3;
 
     private ProjectInfo info;
 
@@ -36,6 +41,8 @@ public class ProjectBuilder {
 
     private static final String MVVM_PREFIX = "mvvm_";
 
+    private static final String NORMAL_PREFIX = "normal_";
+
     public ProjectBuilder(ProjectInfo info) {
         this.info = info;
         resourceDir = new File("resource");
@@ -45,19 +52,11 @@ public class ProjectBuilder {
     public void build() {
         prepareProject();
         //generate project via type
-        switch (info.getType()) {
-            case "2": //mvp
-                createMVPLibrary();
-                createMVPApp();
-                break;
-            case "3": //normal
-                createLibrary();
-                createApp();
-                break;
-            default: //mvvm
-                createMVVMLibrary();
-                createMVVMApp();
-        }
+        int type = getType();
+        prepareBaseLibrary();
+        createLibrary(type);
+        prepareBaseApp();
+        createApp(type);
     }
 
     /**
@@ -81,187 +80,156 @@ public class ProjectBuilder {
                         new File(resourceDir, "proguard-rules.txt").getAbsolutePath()}, info.getPackageName());
         Map<String, String> params = new HashMap<>();
         params.put("GRADLE_VERSION", info.getGradleVer());
+        params.put("LAMBDA_DEPENDENCY", info.isJava8Enabled() ? "\n        classpath 'me.tatarka:gradle-retrolambda:3.2.5'\n" +
+                "        //resolve lambda lint error\n" +
+                "        // @See:https://github.com/evant/gradle-retrolambda/issues/96\n" +
+                "        classpath 'me.tatarka.retrolambda.projectlombok:lombok.ast:0.2.3.a2'":"");
+        params.put("LAMBDA_CONFIG", info.isJava8Enabled() ? "\n" +
+                "    // Exclude the version that the android plugin depends on.\n" +
+                "    configurations.classpath.exclude group: 'com.android.tools.external.lombok'":"");
         File srcFile = new File(resourceDir, "base_build.txt");
         File targetSrcFile = new File(baseDir, "build.gradle");
         FileUtil.copyFileWithParams(targetSrcFile, srcFile, params);
         createDaoGenerator();
+
+
     }
 
     /**
-     * Create library module for "mvp" project
+     * Prepare base library module
      */
-    public void createMVPLibrary() {
+    private void prepareBaseLibrary() {
         File libDir = new File(baseDir, "library");
-        libDir.mkdir();
+        libDir.mkdirs();
+        File androidBaseDir = new File(baseDir, "library/src/main");
+        androidBaseDir.mkdirs();
+        FileUtil.copyDir(androidBaseDir.getAbsolutePath(), new File(resourceDir, "base_lib/res").getAbsolutePath(), info.getPackageName());
+
+        File amSrcFile = new File(resourceDir, "base_lib/AndroidManifest.xml");
+        File amTargetSrcFile = new File(baseDir, "library/src/main/AndroidManifest.xml");
+
+        Map<String, String> params = new HashMap<>();
+        params.put("PACKAGE", info.getPackageName() + ".lib");
+        FileUtil.copyFileWithParams(amTargetSrcFile, amSrcFile, params);
+        File srcDir = new File(androidBaseDir, "java/" + getPackagePath());
+        srcDir.mkdirs();
+        FileUtil.copyDir(srcDir.getAbsolutePath(), new File(resourceDir, "base_lib/lib").getAbsolutePath(), info.getPackageName());
+    }
+
+    /**
+     * Prepare base android module
+     */
+    private void prepareBaseApp() {
+        File appDir = new File(baseDir, "app");
+        appDir.mkdirs();
+        File androidBaseDir = new File(baseDir, "app/src/main");
+        androidBaseDir.mkdirs();
+
+        FileUtil.copyDir(androidBaseDir.getAbsolutePath(), new File(resourceDir, "base_app/res").getAbsolutePath(), info.getPackageName());
+
+        File amSrcFile = new File(resourceDir, "base_app/AndroidManifest.xml");
+        File amTargetSrcFile = new File(baseDir, "app/src/main/AndroidManifest.xml");
+        Map<String, String> params = new HashMap<>();
+        params.put("PACKAGE", info.getPackageName());
+        FileUtil.copyFileWithParams(amTargetSrcFile, amSrcFile, params);
+
+        File stringSrcFile = new File(resourceDir, "base_app/res/values/strings.xml");
+        File stringTargetFile = new File(baseDir, "app/src/main/res/values/strings.xml");
+        if(stringTargetFile.exists()) stringTargetFile.delete();
+        params.clear();
+        params.put("PROJECT_NAME", info.getProjectName());
+        FileUtil.copyFileWithParams(stringTargetFile, stringSrcFile, params);
+
+        File srcDir = new File(androidBaseDir, "java/" + getPackagePath());
+        srcDir.mkdirs();
+        FileUtil.copyDir2(srcDir.getAbsolutePath(), new File(resourceDir, "base_app/src").getAbsolutePath(), info.getPackageName());
+    }
+
+    /**
+     * Create library module
+     */
+    public void createLibrary(int type) {
+        String prefix = getTypePrefix(type);
+        File libDir = new File(baseDir, "library");
+        libDir.mkdirs();
         Map<String, String> params = new HashMap<>();
         params.put("MIN_SDK_VERSION", String.valueOf(info.getMinSdkVer()));
         params.put("TARGET_SDK_VERSION", String.valueOf(info.getTargetSdkVer()));
-        params.put("JAVA_VERSION", JAVA_VERSION);
+        params.put("JAVA_VERSION", info.isJava8Enabled() ? JAVA_8_VERSION : JAVA_7_VERSION);
         params.put("BUILD_TOOLS_VERSION", info.getBuildToolsVersion());
-        File srcFile = new File(resourceDir, MVP_PREFIX + "library/lib_build.txt");
+        if(TYPE_MVVM != type) { //no need of butterknife lib for mvvm pattern
+            params.put("BUTTER_KNIFE_ENABLE", "\n    compile 'com.jakewharton:butterknife:8.0.1'\n");
+        } else {
+            params.put("BUTTER_KNIFE_ENABLE", "");
+        }
+        params.put("LAMBDA_PLUGIN", info.isJava8Enabled() ? "apply plugin: 'me.tatarka.retrolambda'" : "");
+        File srcFile = new File(resourceDir, "lib_build.txt");
         File targetSrcFile = new File(libDir, "build.gradle");
         FileUtil.copyFileWithParams(targetSrcFile, srcFile, params);
 
         File androidBaseDir = new File(baseDir, "library/src/main");
         androidBaseDir.mkdirs();
-        FileUtil.copyDir(androidBaseDir.getAbsolutePath(), new File(resourceDir, MVP_PREFIX + "library/res").getAbsolutePath(), info.getPackageName());
 
-        File amSrcFile = new File(resourceDir, MVP_PREFIX + "library/AndroidManifest.xml");
-        File amTargetSrcFile = new File(baseDir, "library/src/main/AndroidManifest.xml");
-        params.clear();
-        params.put("PACKAGE", info.getPackageName() + ".lib");
-        FileUtil.copyFileWithParams(amTargetSrcFile, amSrcFile, params);
-        File srcDir = new File(androidBaseDir, "java/" + getPackagePath());
+        File srcDir = new File(androidBaseDir, "java/" + getPackagePath() + "/lib");
         srcDir.mkdirs();
-        FileUtil.copyDir(srcDir.getAbsolutePath(), new File(resourceDir, MVP_PREFIX + "library/lib").getAbsolutePath(), info.getPackageName());
+
+        FileUtil.copyDir(srcDir.getAbsolutePath(), new File(resourceDir, prefix + "library/lib/base").getAbsolutePath(), info.getPackageName());
     }
 
     /**
-     * Create android module for "mvp" project
+     * Create android module
      */
-    public void createMVPApp() {
+    public void createApp(int type) {
+        String prefix = getTypePrefix(type);
         File appDir = new File(baseDir, "app");
-        appDir.mkdir();
+        appDir.mkdirs();
         Map<String, String> params = new HashMap<>();
         params.put("MIN_SDK_VERSION", String.valueOf(info.getMinSdkVer()));
         params.put("TARGET_SDK_VERSION", String.valueOf(info.getTargetSdkVer()));
-        params.put("JAVA_VERSION", JAVA_VERSION);
+        params.put("JAVA_VERSION", info.isJava8Enabled() ? JAVA_8_VERSION : JAVA_7_VERSION);
         params.put("BUILD_TOOLS_VERSION", info.getBuildToolsVersion());
-        File srcFile = new File(resourceDir, MVP_PREFIX + "app/app_build.txt");
+        if(TYPE_MVVM == type) { //no need of butterknife lib for mvvm pattern
+            params.put("DATA_BINDING_ENABLE", "\n    dataBinding {\n" +
+                    "        enabled true\n" +
+                    "    }\n");
+            params.put("MVVM_REPLACEMENT","    apt 'com.google.guava:guava:19.0'");
+        } else {
+            params.put("DATA_BINDING_ENABLE", "");
+            params.put("MVVM_REPLACEMENT", "apt 'com.jakewharton:butterknife-compiler:8.0.1'");
+        }
+        params.put("LAMBDA_PLUGIN", info.isJava8Enabled() ? "apply plugin: 'me.tatarka.retrolambda'" : "");
+        File srcFile = new File(resourceDir, "app_build.txt");
         File targetSrcFile = new File(appDir, "build.gradle");
         FileUtil.copyFileWithParams(targetSrcFile, srcFile, params);
 
         File androidBaseDir = new File(baseDir, "app/src/main");
         androidBaseDir.mkdirs();
-        FileUtil.copyDir(androidBaseDir.getAbsolutePath(), new File(resourceDir, MVP_PREFIX + "app/res").getAbsolutePath(), info.getPackageName());
+        FileUtil.copyDir(new File(androidBaseDir.getAbsolutePath(), "res").getAbsolutePath(), new File(resourceDir, prefix + "app/res/layout").getAbsolutePath(), info.getPackageName());
 
-        File amSrcFile = new File(resourceDir, MVP_PREFIX + "app/AndroidManifest.xml");
-        File amTargetSrcFile = new File(baseDir, "app/src/main/AndroidManifest.xml");
-        params.clear();
-        params.put("PACKAGE", info.getPackageName());
-        FileUtil.copyFileWithParams(amTargetSrcFile, amSrcFile, params);
-
-        File srcDir = new File(androidBaseDir, "java/" + getPackagePath());
-        srcDir.mkdirs();
-        FileUtil.copyDir2(srcDir.getAbsolutePath(), new File(resourceDir, MVP_PREFIX + "app/src").getAbsolutePath(), info.getPackageName());
+        File appBaseDir = new File(androidBaseDir, "java/" + getPackagePath());
+        appBaseDir.mkdirs();
+        FileUtil.copyDir(appBaseDir.getAbsolutePath(), new File(resourceDir, prefix + "app/src/base").getAbsolutePath(), info.getPackageName());
+        FileUtil.copyDir(appBaseDir.getAbsolutePath(), new File(resourceDir, prefix + "app/src/feature").getAbsolutePath(), info.getPackageName());
+        FileUtil.copyDir(appBaseDir.getAbsolutePath(), new File(resourceDir, prefix + "app/src/model").getAbsolutePath(), info.getPackageName());
     }
 
-    /**
-     * Create library module for "normal" project
-     */
-    public void createLibrary() {
-        File libDir = new File(baseDir, "library");
-        libDir.mkdir();
-        Map<String, String> params = new HashMap<>();
-        params.put("MIN_SDK_VERSION", String.valueOf(info.getMinSdkVer()));
-        params.put("TARGET_SDK_VERSION", String.valueOf(info.getTargetSdkVer()));
-        params.put("JAVA_VERSION", JAVA_VERSION);
-        params.put("BUILD_TOOLS_VERSION", info.getBuildToolsVersion());
-        File srcFile = new File(resourceDir, "library/lib_build.txt");
-        File targetSrcFile = new File(libDir, "build.gradle");
-        FileUtil.copyFileWithParams(targetSrcFile, srcFile, params);
-
-        File androidBaseDir = new File(baseDir, "library/src/main");
-        androidBaseDir.mkdirs();
-        FileUtil.copyDir(androidBaseDir.getAbsolutePath(), new File(resourceDir, "library/res").getAbsolutePath(), info.getPackageName());
-
-        File amSrcFile = new File(resourceDir, "library/AndroidManifest.xml");
-        File amTargetSrcFile = new File(baseDir, "library/src/main/AndroidManifest.xml");
-        params.clear();
-        params.put("PACKAGE", info.getPackageName() + ".lib");
-        FileUtil.copyFileWithParams(amTargetSrcFile, amSrcFile, params);
-        File srcDir = new File(androidBaseDir, "java/" + getPackagePath());
-        srcDir.mkdirs();
-        FileUtil.copyDir(srcDir.getAbsolutePath(), new File(resourceDir, "library/lib").getAbsolutePath(), info.getPackageName());
+    private int getType() {
+        int type = 1; //default mvvm
+        try {
+            type = Integer.valueOf(info.getType());
+        } catch (Exception ex) {}
+        return type;
     }
 
-    /**
-     * Create android module for "normal" project
-     */
-    public void createApp() {
-        File appDir = new File(baseDir, "app");
-        appDir.mkdir();
-        Map<String, String> params = new HashMap<>();
-        params.put("MIN_SDK_VERSION", String.valueOf(info.getMinSdkVer()));
-        params.put("TARGET_SDK_VERSION", String.valueOf(info.getTargetSdkVer()));
-        params.put("JAVA_VERSION", JAVA_VERSION);
-        params.put("BUILD_TOOLS_VERSION", info.getBuildToolsVersion());
-        File srcFile = new File(resourceDir, "app/app_build.txt");
-        File targetSrcFile = new File(appDir, "build.gradle");
-        FileUtil.copyFileWithParams(targetSrcFile, srcFile, params);
-
-        File androidBaseDir = new File(baseDir, "app/src/main");
-        androidBaseDir.mkdirs();
-        FileUtil.copyDir(androidBaseDir.getAbsolutePath(), new File(resourceDir, "app/res").getAbsolutePath(), info.getPackageName());
-
-        File amSrcFile = new File(resourceDir, "app/AndroidManifest.xml");
-        File amTargetSrcFile = new File(baseDir, "app/src/main/AndroidManifest.xml");
-        params.clear();
-        params.put("PACKAGE", info.getPackageName());
-        FileUtil.copyFileWithParams(amTargetSrcFile, amSrcFile, params);
-
-        File srcDir = new File(androidBaseDir, "java/" + getPackagePath());
-        srcDir.mkdirs();
-        FileUtil.copyDir2(srcDir.getAbsolutePath(), new File(resourceDir, "app/src").getAbsolutePath(), info.getPackageName());
-    }
-
-    /**
-     * Create library module for "mvvm" project
-     */
-    public void createMVVMLibrary() {
-        File libDir = new File(baseDir, "library");
-        libDir.mkdir();
-        Map<String, String> params = new HashMap<>();
-        params.put("MIN_SDK_VERSION", String.valueOf(info.getMinSdkVer()));
-        params.put("TARGET_SDK_VERSION", String.valueOf(info.getTargetSdkVer()));
-        params.put("JAVA_VERSION", JAVA_VERSION);
-        params.put("BUILD_TOOLS_VERSION", info.getBuildToolsVersion());
-        File srcFile = new File(resourceDir, MVVM_PREFIX + "library/lib_build.txt");
-        File targetSrcFile = new File(libDir, "build.gradle");
-        FileUtil.copyFileWithParams(targetSrcFile, srcFile, params);
-
-        File androidBaseDir = new File(baseDir, "library/src/main");
-        androidBaseDir.mkdirs();
-        FileUtil.copyDir(androidBaseDir.getAbsolutePath(), new File(resourceDir, MVVM_PREFIX + "library/res").getAbsolutePath(), info.getPackageName());
-
-        File amSrcFile = new File(resourceDir, MVVM_PREFIX + "library/AndroidManifest.xml");
-        File amTargetSrcFile = new File(baseDir, "library/src/main/AndroidManifest.xml");
-        params.clear();
-        params.put("PACKAGE", info.getPackageName() + ".lib");
-        FileUtil.copyFileWithParams(amTargetSrcFile, amSrcFile, params);
-        File srcDir = new File(androidBaseDir, "java/" + getPackagePath());
-        srcDir.mkdirs();
-        FileUtil.copyDir(srcDir.getAbsolutePath(), new File(resourceDir, MVVM_PREFIX + "library/lib").getAbsolutePath(), info.getPackageName());
-    }
-
-    /**
-     * Create android module for "mvvm" project
-     */
-    public void createMVVMApp() {
-        File appDir = new File(baseDir, "app");
-        appDir.mkdir();
-        Map<String, String> params = new HashMap<>();
-        params.put("MIN_SDK_VERSION", String.valueOf(info.getMinSdkVer()));
-        params.put("TARGET_SDK_VERSION", String.valueOf(info.getTargetSdkVer()));
-        params.put("JAVA_VERSION", JAVA_VERSION);
-        params.put("BUILD_TOOLS_VERSION", info.getBuildToolsVersion());
-        File srcFile = new File(resourceDir, MVVM_PREFIX + "app/app_build.txt");
-        File targetSrcFile = new File(appDir, "build.gradle");
-        FileUtil.copyFileWithParams(targetSrcFile, srcFile, params);
-
-        File androidBaseDir = new File(baseDir, "app/src/main");
-        androidBaseDir.mkdirs();
-        FileUtil.copyDir(androidBaseDir.getAbsolutePath(), new File(resourceDir, MVVM_PREFIX + "app/res").getAbsolutePath(), info.getPackageName());
-
-        File amSrcFile = new File(resourceDir, MVVM_PREFIX + "app/AndroidManifest.xml");
-        File amTargetSrcFile = new File(baseDir, "app/src/main/AndroidManifest.xml");
-        params.clear();
-        params.put("PACKAGE", info.getPackageName());
-        FileUtil.copyFileWithParams(amTargetSrcFile, amSrcFile, params);
-
-        File srcDir = new File(androidBaseDir, "java/" + getPackagePath());
-        srcDir.mkdirs();
-        FileUtil.copyDir2(srcDir.getAbsolutePath(), new File(resourceDir, MVVM_PREFIX + "app/src").getAbsolutePath(), info.getPackageName());
+    private String getTypePrefix(int type) {
+        switch (type) {
+            case 2:
+                return MVP_PREFIX;
+            case 3:
+                return NORMAL_PREFIX;
+            default:
+                return MVVM_PREFIX;
+        }
     }
 
     private void createDaoGenerator() {

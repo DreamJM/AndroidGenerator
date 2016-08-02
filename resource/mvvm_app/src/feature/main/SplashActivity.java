@@ -27,11 +27,18 @@ public class SplashActivity extends DIActivity {
 
     private ActivitySplashBinding binding;
 
+    private LaunchItem launchItem;
+
     @Override
     protected void onCreateView(Bundle savedInstanceState) {
         super.onCreateView(savedInstanceState);
-        new Handler().postDelayed(this::jumpToMain, DELAY);
-        LaunchItem launchItem = new LaunchItem("test", "http://img3.douban.com/img/musician/large/4654.jpg", "http://www.baidu.com");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                jumpToMain();
+            }
+        }, DELAY);
+        launchItem = new LaunchItem("test", "http://img3.douban.com/img/musician/large/4654.jpg", "http://www.google.com");
         binding.setLaunch(launchItem);
         new Handler().postDelayed(new Runnable() {
             @Override

@@ -28,7 +28,6 @@ public class CommandLine {
     private static final int DEFAULT_TARGET_SDK = 23;
 
 
-
     protected static ProjectInfo generateFromCommand(BufferedReader in) throws IOException {
         ProjectInfo info = new ProjectInfo();
 
@@ -49,7 +48,7 @@ public class CommandLine {
             System.out.println("====Please input package name====");
             packageName = in.readLine().trim().toLowerCase();
             Pattern pattern = Pattern.compile("^(([a-z][0-9a-z]*)[.])*([a-z][0-9a-z]*)$");
-            if(!pattern.matcher(packageName).matches()) {
+            if (!pattern.matcher(packageName).matches()) {
                 packageName = "";
                 System.out.println("package format error!");
             }
@@ -60,11 +59,11 @@ public class CommandLine {
         do {
             System.out.println("====Please input your local gradle version(default value is 2.8)====");
             gradleVersion = in.readLine().trim();
-            if("".equals(gradleVersion)) {
+            if ("".equals(gradleVersion)) {
                 gradleVersion = DEFAULT_GRADLE_VERSION;
             } else {
                 Pattern pattern = Pattern.compile("^(([0-9]*)[.])*([0-9]*)$");
-                if(!pattern.matcher(gradleVersion).matches()) {
+                if (!pattern.matcher(gradleVersion).matches()) {
                     gradleVersion = "";
                     System.out.println("version format error!");
                 }
@@ -76,11 +75,11 @@ public class CommandLine {
         do {
             System.out.println("====Please input your local build tools version(default value is 23.0.1)====");
             buildToolsVer = in.readLine().trim();
-            if("".equals(buildToolsVer)) {
+            if ("".equals(buildToolsVer)) {
                 buildToolsVer = DEFAULT_TOOLS_VERSION;
             } else {
                 Pattern pattern = Pattern.compile("^(([0-9]*)[.])*([0-9]*)$");
-                if(!pattern.matcher(buildToolsVer).matches()) {
+                if (!pattern.matcher(buildToolsVer).matches()) {
                     buildToolsVer = "";
                     System.out.println("version format error!");
                 }
@@ -92,12 +91,12 @@ public class CommandLine {
         do {
             System.out.println("====Please input minimal sdk version(default value is 14)====");
             String inputVersion = in.readLine().trim();
-            if("".equals(inputVersion)) {
+            if ("".equals(inputVersion)) {
                 minSdkVer = DEFAULT_MIN_SDK;
             } else {
                 try {
                     minSdkVer = Integer.parseInt(inputVersion);
-                    if(minSdkVer <= 13) {
+                    if (minSdkVer <= 13) {
                         System.out.println("minimal sdk version is 14");
                     }
                 } catch (Exception ex) {
@@ -111,12 +110,12 @@ public class CommandLine {
         do {
             System.out.println("====Please input target sdk version(default value is 23)====");
             String inputVersion = in.readLine().trim();
-            if("".equals(inputVersion)) {
+            if ("".equals(inputVersion)) {
                 targetSdkVer = DEFAULT_TARGET_SDK;
             } else {
                 try {
                     targetSdkVer = Integer.parseInt(inputVersion);
-                    if(targetSdkVer < info.getMinSdkVer()) {
+                    if (targetSdkVer < info.getMinSdkVer()) {
                         System.out.println("target sdk version must be greater than minimal sdk version");
                     }
                 } catch (Exception ex) {
@@ -125,6 +124,14 @@ public class CommandLine {
             }
         } while (targetSdkVer < info.getMinSdkVer());
         info.setTargetSdkVer(targetSdkVer);
+
+        boolean java8Enabled = false;
+        System.out.println("====Whether use java 8 for development(y/n)====");
+        String input = in.readLine().trim();
+        if ("y".equals(input.toLowerCase()) || "yes".equals(input.toLowerCase())) {
+            java8Enabled = true;
+        }
+        info.setJava8Enabled(java8Enabled);
 
         return info;
     }

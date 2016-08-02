@@ -32,6 +32,8 @@ public class ProjectInfo {
 
     private String buildToolsVersion;
 
+    private boolean java8Enabled;
+
     public String getType() {
         return type;
     }
@@ -86,5 +88,13 @@ public class ProjectInfo {
 
     public void setBuildToolsVersion(String buildToolsVersion) {
         this.buildToolsVersion = buildToolsVersion;
+    }
+
+    public boolean isJava8Enabled() {
+        return java8Enabled;
+    }
+
+    public void setJava8Enabled(boolean java8Enabled) {
+        this.java8Enabled = java8Enabled;
     }
 }
