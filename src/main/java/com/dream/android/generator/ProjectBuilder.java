@@ -73,7 +73,8 @@ public class ProjectBuilder {
         }
         baseDir.mkdirs();
         FileUtil.copyFileToDir(baseDir.getAbsolutePath(),
-                new String[]{new File(resourceDir, "settings.gradle").getAbsolutePath()}, info.getPackageName());
+                new String[]{new File(resourceDir, "settings.gradle").getAbsolutePath(),
+                             new File(resourceDir, "gradle.properties").getAbsolutePath()}, info.getPackageName());
         FileUtil.copyFileToDir(baseDir.getAbsolutePath(), new String[]{
                         new File(resourceDir, "android.keystore").getAbsolutePath(),
                         new File(resourceDir, "debug.keystore").getAbsolutePath(),
@@ -192,7 +193,7 @@ public class ProjectBuilder {
             params.put("DATA_BINDING_ENABLE", "\n    dataBinding {\n" +
                     "        enabled true\n" +
                     "    }\n");
-            params.put("MVVM_REPLACEMENT","    apt 'com.google.guava:guava:19.0'");
+            params.put("MVVM_REPLACEMENT","apt 'com.google.guava:guava:19.0'");
         } else {
             params.put("DATA_BINDING_ENABLE", "");
             params.put("MVVM_REPLACEMENT", "apt 'com.jakewharton:butterknife-compiler:8.0.1'");
